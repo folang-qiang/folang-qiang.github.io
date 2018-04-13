@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="懒货一个，吃货一枚">
+<meta property="og:type" content="website">
+<meta property="og:title" content="folang">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="folang">
+<meta property="og:description" content="懒货一个，吃货一枚">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="folang">
+<meta name="twitter:description" content="懒货一个，吃货一枚">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
+
+  <title>folang</title>
+  
+
+
+
+
+
+
+
+
+</head>
+ 
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> 
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right 
+  page-home">
+    <div class="headband"></div>
+<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">folang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/2018-03-08-postgres、pgpool设置优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/08/2018-03-08-postgres、pgpool设置优化/" itemprop="url">postgres、pgpool设置优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T00:00:00+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="postgres、pgpool设置优化"><a href="#postgres、pgpool设置优化" class="headerlink" title="postgres、pgpool设置优化"></a>postgres、pgpool设置优化</h2><h3 id="listen-backlog-multiplier"><a href="#listen-backlog-multiplier" class="headerlink" title="listen_backlog_multiplier"></a>listen_backlog_multiplier</h3><pre><code>控制连接队列的长度，默认2， 队列长度由 listen_backlog_multiplier * num_init_children 定义。
+</code></pre><h3 id="num-init-children"><a href="#num-init-children" class="headerlink" title="num_init_children"></a>num_init_children</h3><pre><code>支持的最大并发连接数
+如果超过 num_init_children，它们将被阻塞，最多有 2*num_init_children 可以被放入等待队列。
+队列长度 = num_init_children*listen_backlog_multiplier，队列长度达到这个数值，
+可能发生以下问题：
+    1) 连接到 pgpool-II 失败
+    2) 连接到 pgpool-II 的时间变长
+
+pacer最大连接数：6000（1500+1500*3）
+ccl最大连接数：2250（750+750*2）
+pacer不够用，所以增加到1500，ccl连接够用，没有增加的必要。
+</code></pre><h3 id="allow-sql-comments"><a href="#allow-sql-comments" class="headerlink" title="allow_sql_comments"></a>allow_sql_comments</h3><pre><code>是否忽略Nobalance SQL注释,Off、NObalance追加無効。
+</code></pre><h3 id="sr-check-period"><a href="#sr-check-period" class="headerlink" title="sr_check_period"></a>sr_check_period</h3><pre><code>多久检查一次，单位为秒
+如果设置为10s，出现主备机数据不一致，则10s内不访问备机。
+如果数据变化量大，可以把检查间隔设成3s。
+</code></pre><h3 id="max-connections"><a href="#max-connections" class="headerlink" title="max_connections"></a>max_connections</h3><pre><code>根据用户并发访问数量来决定。过小用户无法连接，过大浪费服务器资源。
+</code></pre><h3 id="synchronous-commit"><a href="#synchronous-commit" class="headerlink" title="synchronous_commit"></a>synchronous_commit</h3><pre><code>控制事务提交模式和备机的同期模式，同步模式有效。
+</code></pre><h3 id="wal-keep-segments"><a href="#wal-keep-segments" class="headerlink" title="wal_keep_segments"></a>wal_keep_segments</h3><pre><code>主备同期，主机数据先放到wal，wal的容量 = 16M*wal_keep_segments。
+如果从备份开始到备份结束，数据变化量超过16M*wal_keep_segments，可以调整wal_keep_segments的大小。
+</code></pre><h3 id="max-standby-streaming-delay"><a href="#max-standby-streaming-delay" class="headerlink" title="max_standby_streaming_delay"></a>max_standby_streaming_delay</h3><pre><code>主备机数据不一致，备机等待数据一致后，再处理，max_standby_streaming_delay设置等待时间。
+</code></pre><h3 id="shared-buffers"><a href="#shared-buffers" class="headerlink" title="shared_buffers"></a>shared_buffers</h3><pre><code>数据库共享内存，建议物理内存/4。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/27/2018-02-27-AndroidStudio升级到3.0，打不开2.0的项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/27/2018-02-27-AndroidStudio升级到3.0，打不开2.0的项目/" itemprop="url">AndroidStudio升级到3.0，打不开2.0的项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T00:00:00+08:00">
+                2018-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="AndroidStudio升级到3-0，打不开2-0的项目"><a href="#AndroidStudio升级到3-0，打不开2-0的项目" class="headerlink" title="AndroidStudio升级到3.0，打不开2.0的项目"></a>AndroidStudio升级到3.0，打不开2.0的项目</h3><pre><code>1.找一个能运行的as项目
+
+2.对比这两个项目的build.gradle、gradle-wrapper.properties
+    gradle-wrapper.properties的文件目录：项目/gradle/wrapper/gradle-wrapper.properties
+
+3.修改成可用的版本
+
+4.重新导入项目
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/09/2018-02-09-postgres 查询优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/09/2018-02-09-postgres 查询优化/" itemprop="url">postgres 查询优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T00:00:00+08:00">
+                2018-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、函数优化"><a href="#一、函数优化" class="headerlink" title="一、函数优化"></a>一、函数优化</h2><h3 id="1-PostgreSQL-explain-Plan-Rows快速估算结果集数量"><a href="#1-PostgreSQL-explain-Plan-Rows快速估算结果集数量" class="headerlink" title="1.PostgreSQL explain Plan Rows快速估算结果集数量"></a>1.PostgreSQL explain Plan Rows快速估算结果集数量</h3><p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan1.png" alt=""></p>
+<p>总花费：333297</p>
+<p>Full scan ccl_reply：100144</p>
+<p>Full scan ccl_topics：118671</p>
+<p>Full scan ccl_reply：96987</p>
+<h3 id="2-调查分析-amp-改善"><a href="#2-调查分析-amp-改善" class="headerlink" title="2.调查分析&amp;改善"></a>2.调查分析&amp;改善</h3><p>ccl_topics的topiccreatercd、CCL_Reply的ToReplierCD作为join条件没有索引，导致全表扫描，浪费大量时间。</p>
+<p>增加topiccreatercd索引、CCL_Reply增加ToReplierCD索引。</p>
+<h3 id="3-explain-Plan-Rows快速估算结果集数量"><a href="#3-explain-Plan-Rows快速估算结果集数量" class="headerlink" title="3.explain Plan Rows快速估算结果集数量"></a>3.explain Plan Rows快速估算结果集数量</h3><p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan2.png" alt=""></p>
+<p>总花费：13902</p>
+<p>改善前：333297，提高24倍。</p>
+<h3 id="4-改善效果"><a href="#4-改善效果" class="headerlink" title="4.改善效果"></a>4.改善效果</h3><p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan3.png" alt=""></p>
+<h2 id="二、PostgreSQL-explain-Plan-Rows-使用"><a href="#二、PostgreSQL-explain-Plan-Rows-使用" class="headerlink" title="二、PostgreSQL explain Plan Rows 使用"></a>二、PostgreSQL explain Plan Rows 使用</h2><p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan4.png" alt=""></p>
+<h2 id="三、增加索引，带来的影响"><a href="#三、增加索引，带来的影响" class="headerlink" title="三、增加索引，带来的影响"></a>三、增加索引，带来的影响</h2><p>1.默认情况下，增加索引过程中，无法写入。</p>
+<pre><code>100万数据量下，15s左右
+</code></pre><p>2.创建索引后，系统必须保持索引与数据表的同步。增加数据写入的开销。</p>
+<p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan5.png" alt=""></p>
+<pre><code>增加索引后，查询1000次，速度提高；查询1、100次，速度降低，服务器状态对查询速度影响更大。
+增加索引对查询速度无明显影响。
+
+增加索引后，插入1、100次，速度提高；插入1000次，速度降低，服务器状态对插入速度影响更大。
+增加索引对插入速度无明显影响。
+</code></pre><p><img src="https://raw.githubusercontent.com/zhangyongguang/zhangyongguang.github.io/master/img/plan6.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-centos6.5 postgres主备机重启流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-centos6.5 postgres主备机重启流程/" itemprop="url">centos6.5 postgres主备机重启流程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Postgres主备机数据库重启流程"><a href="#Postgres主备机数据库重启流程" class="headerlink" title="Postgres主备机数据库重启流程"></a>Postgres主备机数据库重启流程</h3><p>1.先关闭pgpool</p>
+<p>2.再关闭备机</p>
+<p>3.再关闭主机</p>
+<p>4.启动主机</p>
+<p>5.启动备机</p>
+<p>6.启动pgpool</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-centos6.5 postgres主备切换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-centos6.5 postgres主备切换/" itemprop="url">centos6.5 postgres主备切换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Hot-Standby"><a href="#Hot-Standby" class="headerlink" title="Hot Standby"></a>Hot Standby</h3><p>作用<br>读写分离<br>克隆主数据库,当主数据库出现致命状况时,起动备数据库,替代主数据库.</p>
+<p>备份方式<br>流复制:   从库通过tcp流从主库中同步相应的数据<br>基于文件: 主库执行完,才拷贝到从库</p>
+<h3 id="1-主机配置"><a href="#1-主机配置" class="headerlink" title="1.主机配置"></a>1.主机配置</h3><pre><code>1) 修改pg_hba.conf,设置postgres用户,请求流复制
+    host    replication     postgres        0.0.0.0/0            md5
+
+2) 修改postgresql.conf
+    # 设置主备模式
+    wal_level = hot_standby
+    # 设置从机数量
+    max_wal_senders = 5
+    # 设置流复制保留的最多的xlog数目
+    wal_keep_segments = 1000
+    # 防止主库生成WAL日志太快，日志还没有来得及传送到standby，就会循环覆盖
+    max_wal_senders = 5
+    # 设置流复制主机发送数据的超时时间
+    wal_sender_timeout = 60s
+    # 最大连接数,从库的max_connections必须要大于主库的,一般查多于写
+    max_connections = 100
+3) 重启主机
+    service postgres-9.3-openscg restart
+</code></pre><h3 id="2-从机配置"><a href="#2-从机配置" class="headerlink" title="2.从机配置"></a>2.从机配置</h3><pre><code>1) 修改recovery.conf
+    cp /opt/postgres/9.3/share/postgresql/recovery.conf.sample /opt/postgres/9.3/data/recovery.conf
+    # 设为从机
+    standby_mode = on
+    # 对应主机的信息
+    primary_conninfo = &apos;host=10.144.208.5 port=5432 user=postgres password=sa&apos;
+    # 流复制同步到最新的数据
+    recovery_target_timeline = &apos;latest&apos;
+2) 修改postgresql.conf
+    # 开启数据查询
+    hot_standby = on
+    # 数据流备份的最大延迟时间
+    max_standby_streaming_delay = 30s
+    # 多久向主报告一次从的状态
+    wal_receiver_status_interval = 1s
+    # 如果有错误的数据复制，是否向主进行反馈
+    hot_standby_feedback = on
+3) 重启从机
+    service postgres-9.3-openscg restart
+</code></pre><h3 id="3-查看状态"><a href="#3-查看状态" class="headerlink" title="3.查看状态"></a>3.查看状态</h3><pre><code>/opt/postgres/9.3/bin/psql -U postgres -p 5432 -c &quot;select * from pg_stat_replication;&quot;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-postgres sqlserver数据类型对比/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-postgres sqlserver数据类型对比/" itemprop="url">postgres sqlserver数据类型对比</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>SQL Server</th>
+<th>PostgreSQL</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数字型</td>
+</tr>
+<tr>
+<td></td>
+<td>tinyint</td>
+<td>smallint</td>
+<td>tinyint(0-255),smallint(-32768-32767)</td>
+</tr>
+<tr>
+<td></td>
+<td>smallint</td>
+<td>smallint,int2</td>
+<td>int2是smallint别名</td>
+</tr>
+<tr>
+<td></td>
+<td>int</td>
+<td>int</td>
+</tr>
+<tr>
+<td></td>
+<td>bigint</td>
+<td>bigint</td>
+</tr>
+<tr>
+<td></td>
+<td>decimal</td>
+<td>decimal</td>
+</tr>
+<tr>
+<td></td>
+<td>numeric</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td></td>
+<td>float</td>
+<td>real,float4</td>
+</tr>
+<tr>
+<td></td>
+<td>real</td>
+<td>double precision</td>
+</tr>
+<tr>
+<td>字符型</td>
+</tr>
+<tr>
+<td></td>
+<td>char</td>
+<td>char</td>
+<td>postgresql可以存储n个字符</td>
+</tr>
+<tr>
+<td></td>
+<td>nchar</td>
+<td>char</td>
+</tr>
+<tr>
+<td></td>
+<td>nvarchar</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td></td>
+<td>varchar</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td></td>
+<td>text</td>
+<td>text</td>
+</tr>
+<tr>
+<td></td>
+<td>ntext</td>
+<td>text</td>
+</tr>
+<tr>
+<td>时间</td>
+</tr>
+<tr>
+<td></td>
+<td>datetime</td>
+<td>date</td>
+<td>只是时间</td>
+</tr>
+<tr>
+<td></td>
+<td>datetime</td>
+<td>timestamp</td>
+<td>时间与日期</td>
+</tr>
+<tr>
+<td>货币</td>
+</tr>
+<tr>
+<td></td>
+<td>money</td>
+<td>numeric</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-postgres sqlserver常用函数对比/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-postgres sqlserver常用函数对比/" itemprop="url">postgres sqlserver常用函数对比</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-字符串转换"><a href="#1-字符串转换" class="headerlink" title="1.字符串转换"></a>1.字符串转换</h3><pre><code>#字符串转时间
+CONVERT(DATETIME, &apos;&apos;1900-01-01 00:00:00&apos;&apos;, 102)
+to_timestamp(&apos;1900-01-01 00:00:00.000&apos;,&apos;YYYY-mm-dd HH24:MI:SS.MS&apos;)
+
+#时间转字符串
+convert(varchar(10),getdate(),120)
+to_char(current_timestamp, &apos;yyyy-mm-dd HH24:MI:SS.MS&apos;);
+
+#字符串转数字
+convert(int,&apos;3&apos;)
+to_number(string,&apos;9&apos;)
+
+#数字转字符串
+convert(varchar(5),3)
+to_char(ReasonNo, &apos;9999999999&apos;)
+</code></pre><h3 id="2-分割字符串"><a href="#2-分割字符串" class="headerlink" title="2.分割字符串"></a>2.分割字符串</h3><pre><code>#取右侧字符串
+RIGHT(@BranchCD_1,4)
+substring(BranchCD_1 from &apos;....$&apos;);1个.代表一位
+
+#去空格
+trim(strSQL)
+btrim(strSQL, &apos; &apos;)
+</code></pre><h3 id="3-大小写转换"><a href="#3-大小写转换" class="headerlink" title="3.大小写转换"></a>3.大小写转换</h3><pre><code>lower(&apos;STRSQL&apos;);
+lower(&apos;STRSQL&apos;);
+</code></pre><h3 id="4-替换null"><a href="#4-替换null" class="headerlink" title="4.替换null"></a>4.替换null</h3><pre><code>isnull(RetailStock,0)
+COALESCE(RetailStock,0)
+</code></pre><h3 id="5-执行字符串"><a href="#5-执行字符串" class="headerlink" title="5.执行字符串"></a>5.执行字符串</h3><pre><code>exec strSQL
+execute strSQL
+</code></pre><h3 id="6-拼接字符串"><a href="#6-拼接字符串" class="headerlink" title="6.拼接字符串"></a>6.拼接字符串</h3><pre><code>aaaa&apos; + &apos;ccccc&apos; + &apos;bbb&apos;
+aaaa&apos; || &apos;ccccc&apos; || &apos;bbb&apos;
+</code></pre><h3 id="7-拼接字符串插入变量"><a href="#7-拼接字符串插入变量" class="headerlink" title="7.拼接字符串插入变量"></a>7.拼接字符串插入变量</h3><pre><code>&quot;EXEC &apos;select @v_upInt = name
+from &apos; + @v_str_StockTable + &apos;;&apos;;&quot;
+
+&quot;v_strSQL_UpdatePack_EXITS :=&apos;select 1 from &apos; || v_str_StockTable || &apos;;&apos;;
+EXECUTE v_strSQL_UpdatePack_EXITS into v_upInt;&quot;
+</code></pre><h3 id="8-取前-n-行"><a href="#8-取前-n-行" class="headerlink" title="8.取前 n  行"></a>8.取前 n  行</h3><pre><code>select top 1 * from table
+select * from table limit 1
+</code></pre><h3 id="9-新建临时表"><a href="#9-新建临时表" class="headerlink" title="9.新建临时表"></a>9.新建临时表</h3><pre><code> Create table #TempStocksAdjust
+(
+    SingleProductCode varchar(15) NOT NULL
+);
+
+
+Create temp table TempStocksAdjust
+(
+    SingleProductCode varchar(15) NOT NULL
+);
+</code></pre><h3 id="10-if"><a href="#10-if" class="headerlink" title="10.if"></a>10.if</h3><pre><code>if exists (select 1 from str_StockTable where ProductCode = &apos;&apos;ProdCode&apos;&apos;)
+begin
+    select 1
+end
+
+if  exists( select *from information_schema.tables where table_name = v_tablename)
+then
+    execute v_sql1;
+end if;
+</code></pre><h3 id="11-while"><a href="#11-while" class="headerlink" title="11.while"></a>11.while</h3><pre><code>WHILE (SELECT AVG(ListPrice) FROM Production.Product) &lt; $300
+BEGIN
+   select 1
+END
+
+while v_i&lt;320 loop
+    select 1
+end loop;
+</code></pre><h3 id="12-for"><a href="#12-for" class="headerlink" title="12.for"></a>12.for</h3><pre><code>null
+
+FOR i IN 1..10 LOOP
+    select 1;
+END LOOP;
+</code></pre><h3 id="13-向变量赋值"><a href="#13-向变量赋值" class="headerlink" title="13.向变量赋值"></a>13.向变量赋值</h3><pre><code>SELECT @PackIrisu = BundleQty
+FROM TmpProduct ;
+
+SELECT BundleQty INTO  v_PackIrisu
+FROM TmpProduct ;
+</code></pre><h3 id="14-从某表新建表并插入数据"><a href="#14-从某表新建表并插入数据" class="headerlink" title="14.从某表新建表并插入数据"></a>14.从某表新建表并插入数据</h3><pre><code>SELECT
+    T.ProductCode   AS  ProductCode
+INTO HistoryTempA1
+FROM TempTable_StocksAdjust T
+
+CREATE TABLE HistoryTempA1 AS
+SELECT T.ProductCode AS ProductCode
+FROM TempTable_StocksAdjust T;
+</code></pre><h3 id="15-赋值"><a href="#15-赋值" class="headerlink" title="15.赋值"></a>15.赋值</h3><pre><code>strSQL=&apos;aaaa&apos;
+strSQL:=&apos;aaaa&apos;
+</code></pre><h3 id="16-获取传入参数"><a href="#16-获取传入参数" class="headerlink" title="16.获取传入参数"></a>16.获取传入参数</h3><pre><code>EXEC  GetNewUpdateID @ReturnID = @StockUpdateId OUTPUT
+select v_returnid INTO v_StockUpdateId from stockdb.GetNewUpdateID();
+</code></pre><h3 id="17-执行存储过程"><a href="#17-执行存储过程" class="headerlink" title="17.执行存储过程"></a>17.执行存储过程</h3><pre><code>exec GetNewUpdateID
+SELECT * from stockdb.getnewupdateid();
+</code></pre><h3 id="18-定义变量"><a href="#18-定义变量" class="headerlink" title="18.定义变量"></a>18.定义变量</h3><pre><code>DECLARE @strSQL_Delete AS VARCHAR(1000)
+DECLARE v_str_StockTable varchar(50);
+</code></pre><h3 id="19-打印语句"><a href="#19-打印语句" class="headerlink" title="19.打印语句"></a>19.打印语句</h3><pre><code>PRINT @ExecuteSQL
+RAISE NOTICE &apos;%&apos; , v_sql;
+</code></pre><h3 id="20-捕获异常"><a href="#20-捕获异常" class="headerlink" title="20.捕获异常"></a>20.捕获异常</h3><pre><code>IF(@@ERROR&lt;&gt;0)
+Begin
+    Select @LogMsg=@strStoreCd+&apos;店入荷予定日更新失敗。&apos;
+    Goto Error_Handle
+End
+
+BEGIN
+    execute v_sq into v_count;
+    EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE &apos;%&apos; , SQLERRM;
+END;
+</code></pre><h3 id="21-查找字符串所在位置"><a href="#21-查找字符串所在位置" class="headerlink" title="21.查找字符串所在位置"></a>21.查找字符串所在位置</h3><pre><code>CHARINDEX(&apos;/-/&apos;,@ORDER_NUM_STR)
+POSITION(&apos;/-/&apos; in v_ORDER_NUM_STR);
+</code></pre><h3 id="22-delete-join"><a href="#22-delete-join" class="headerlink" title="22.delete join"></a>22.delete join</h3><pre><code>Delete #T_Wスケジュール
+From #T_Wスケジュール T1
+Inner Join T_D例外スケジュール T2
+On T1.BranchCD=T2.店CD
+And T1.SupplierCD=T2.ベンダーCD
+And T1.DeliveryWeekDay=T2.納品曜日
+Where  T1.[WeekDay]&lt;&gt;T2.発注曜日
+
+delete from T_Wスケジュール T1
+where exists
+(   select *
+    From T_D例外スケジュール T2
+    Where T1.BranchCD=T2.店CD
+        And T1.SupplierCD=T2.ベンダーCD
+        And T1.DeliveryWeekDay=T2.納品曜日
+        and  T1.WeekDay&lt;&gt;T2.発注曜日
+);
+</code></pre><h3 id="23-update-join"><a href="#23-update-join" class="headerlink" title="23.update join"></a>23.update join</h3><pre><code>UPDATE T1
+set T1.OrderDateTime =  T2.発注日
+from shT_Temp_ConfineTable_in_IP as T1
+inner join T_W修正発注締切日 as  T2
+on  T2.ベンダーCD=T1.SupplierCD
+
+UPDATE shT_Temp_ConfineTable_in_IP  T1
+set OrderDateTime =  T2.発注日
+from T_W修正発注締切日 T2
+WHERE T2.ベンダーCD=T1.SupplierCD
+</code></pre><h3 id="24-时间-日期的加减"><a href="#24-时间-日期的加减" class="headerlink" title="24.时间,日期的加减"></a>24.时间,日期的加减</h3><pre><code>dateadd(day,2,getdate())
+date &apos;2001-09-28&apos; + interval &apos;1 hour&apos;
+</code></pre><h3 id="25-获取日期时间中的一段"><a href="#25-获取日期时间中的一段" class="headerlink" title="25.获取日期时间中的一段"></a>25.获取日期时间中的一段</h3><pre><code>select DatePart (yyyy ,getdate())
+EXTRACT(DAY from now())
+</code></pre><h3 id="26-返回当前系统日期时间"><a href="#26-返回当前系统日期时间" class="headerlink" title="26.返回当前系统日期时间"></a>26.返回当前系统日期时间</h3><pre><code>select getdate()
+select now();
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-centos7 jdk安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-centos7 jdk安装/" itemprop="url">centos7 jdk安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h2><h3 id="1-从从远程服务器复制到本地"><a href="#1-从从远程服务器复制到本地" class="headerlink" title="1.从从远程服务器复制到本地"></a>1.从从远程服务器复制到本地</h3><pre><code>scp root@10.144.87.70:/root/jdk-7u71-linux-x64.rpm /root
+</code></pre><h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h3><pre><code>rpm -ivh /root/jdk-7u71-linux-x64.rpm
+</code></pre><h3 id="3-设置环境变量（在文件末尾加入）"><a href="#3-设置环境变量（在文件末尾加入）" class="headerlink" title="3.设置环境变量（在文件末尾加入）"></a>3.设置环境变量（在文件末尾加入）</h3><pre><code>vim /etc/profile
+export JAVA_HOME=/usr/java/jdk1.7.0_71
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+export JAVA_HOME CLASSPATH PATH
+</code></pre><h3 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h3><pre><code>java -version
+javac
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-postgres建立外部表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-postgres建立外部表/" itemprop="url">postgres建立外部表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="建立外部表"><a href="#建立外部表" class="headerlink" title="建立外部表"></a>建立外部表</h2><pre><code>--安装postgres_fdw
+
+CREATE EXTENSION postgres_fdw
+
+--新建远程数据库
+
+create server masterdb foreign data wrapper postgres_fdw options (host localhost,dbname MasterDB,port 5432) ;
+
+--新建用户
+
+create user mapping FOR postgres server masterdb options (user postgres,password sa) ;
+
+--建立外部表
+
+CREATE FOREIGN TABLE branches
+
+   (branchcd integer ,
+
+    branchname character varying(64) ,
+
+    branchtype integer NOT NULL)
+
+   SERVER masterdb;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07-centos6.5 安装nfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/07/2018-02-07-centos6.5 安装nfs/" itemprop="url">centos6.5 安装nfs</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T00:00:00+08:00">
+                2018-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><pre><code># 创建用户
+useradd -d /home/share -m share -s /bin/bash
+# 查看用户id
+cat /etc/passwd | grep share
+# 配置nfs文件
+vi /etc/exports
+    /sharefiles/  172.17.3.0/24(rw,sync,all_squash,anonuid=502,anongid=502)
+# 配置生效
+exportfs -r
+# 创建共享目录
+mkdir -p /sharefiles/pacerfiles/NewProdPosWS
+chown -R share:share /sharefiles
+# 启动/重启服务
+chkconfig nfs on
+service rpcbind restart
+service nfs start
+</code></pre><h3 id="服务端-客户端"><a href="#服务端-客户端" class="headerlink" title="服务端/客户端"></a>服务端/客户端</h3><pre><code>#创建共享目录
+mkdir /sharefileslink
+#测试挂载
+showmount -e 172.17.3.186
+Export list for 172.17.3.186:
+/sharefiles 172.17.3.0/24
+#挂载
+mount -t nfs 172.17.3.186:/sharefiles /sharefileslink
+#解除挂载
+umount /sharefileslink
+#建立link
+ln -s /sharefileslink/pacerfiles/NewProdPosWS /opt/newProdPos
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="李强" />
+            
+              <p class="site-author-name" itemprop="name">李强</p>
+              <p class="site-description motion-element" itemprop="description">懒货一个，吃货一枚</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李强</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'manual') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"display":{"position":"left"},"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
