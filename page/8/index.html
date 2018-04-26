@@ -321,6 +321,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-adb模拟用户登录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-adb模拟用户登录/" itemprop="url">adb模拟用户登录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-登录"><a href="#1-登录" class="headerlink" title="1.登录"></a>1.登录</h3><pre><code>adb -s 10.6.4.136 shell input tap 360 720
+sleep 1
+</code></pre><h3 id="2-手入力"><a href="#2-手入力" class="headerlink" title="2.手入力"></a>2.手入力</h3><pre><code>adb  -s 10.6.4.136 shell input tap 360 700
+adb  -s 10.6.4.136 shell input text &quot;10085467&quot;
+adb  -s 10.6.4.136 shell input tap 600 1250
+adb  -s 10.6.4.136 shell input text &quot;zyg122401&quot;
+adb  -s 10.6.4.136 shell input tap 600 1250
+sleep 1
+</code></pre><h3 id="3-退出"><a href="#3-退出" class="headerlink" title="3.退出"></a>3.退出</h3><pre><code>adb  -s 10.6.4.136 shell input tap 600 1100
+adb  -s 10.6.4.136 shell input tap 250 800
+sleep 1
+echo 1
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Centos 7 调整root分区/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-Centos 7 调整root分区/" itemprop="url">Centos 7 调整root分区</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>把/home内容备份，然后将/home文件系统所在的逻辑卷删除，扩大/root文件系统，新建/home ，恢复/home内容</p>
+<h2 id="扩大root分区"><a href="#扩大root分区" class="headerlink" title="扩大root分区"></a>扩大root分区</h2><pre><code>#1.查看分区
+
+    df -h
+
+#2.备份home分区文件
+
+    tar cvf /tmp/home.tar /home
+
+#3.卸载/home，如果无法卸载，先终止使用/home文件系统的进程
+
+    fuser -km /home/
+
+    umount /home
+
+#4.删除/home所在的lv
+
+    lvremove /dev/mapper/centos-home
+
+#5.扩展/root所在的lv，增加100G
+
+    lvextend -L +100G /dev/mapper/centos-root
+
+#6.扩展/root文件系统
+
+    xfs_growfs /dev/mapper/centos-root
+
+#7.重新创建home lv
+
+    lvcreate -L 50G -n /dev/mapper/centos-home
+
+#8. 创建文件系统
+
+    mkfs.xfs  /dev/mapper/centos-home
+
+#9.挂载home
+
+    mount /dev/mapper/centos-home
+
+#10.home文件恢复
+
+    tar xvf /tmp/home.tar -C /home/
+
+    cd /home/home/
+
+    mv * ../
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-adb connect 连接失败/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,7 +737,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Android Studio修改logcat行数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Android Studio显示行数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -460,7 +756,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-Android Studio修改logcat行数/" itemprop="url">Android Studio修改logcat行数</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-Android Studio显示行数/" itemprop="url">Android Studio显示行数</a></h1>
         
 
         <div class="post-meta">
@@ -512,12 +808,8 @@
       
         
           
-            <h3 id="修改logcat的缓存大小"><a href="#修改logcat的缓存大小" class="headerlink" title="修改logcat的缓存大小"></a>修改logcat的缓存大小</h3><pre><code>#bin\idea.properties
-vi /Applications/DataGrip.app/Contents/bin/idea.properties
-    idea.cycle.buffer.size=1024
-    替换为
-    idea.cycle.buffer.size=102400
-</code></pre>
+            <h3 id="打开setting，输入line检索，勾选Show-line-numbers"><a href="#打开setting，输入line检索，勾选Show-line-numbers" class="headerlink" title="打开setting，输入line检索，勾选Show line numbers"></a>打开setting，输入line检索，勾选Show line numbers</h3><p><img src="http://img.blog.csdn.net/20170307215601757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGVsbG9fenln/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+
           
         
       
@@ -1097,7 +1389,7 @@ $ git archives
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1119,7 +1411,7 @@ $ git archives
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

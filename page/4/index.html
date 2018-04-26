@@ -321,6 +321,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/2018-01-11-tomcat连接超时/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/11/2018-01-11-tomcat连接超时/" itemprop="url">tomcat连接超时</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T00:00:00+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="tomcat连接超时"><a href="#tomcat连接超时" class="headerlink" title="tomcat连接超时"></a>tomcat连接超时</h2><p>tomcat7的请求不会超时，tomcat7不会主动断开跟客户端的链接。</p>
+<h3 id="connectionTimeout"><a href="#connectionTimeout" class="headerlink" title="connectionTimeout"></a>connectionTimeout</h3><p>默认值 60s</p>
+<p>在接受连接之后等待的请求URI的毫秒数。</p>
+<p>标准server.xml将其设置为20000（即20秒），-1来表示无（即无限）超时。</p>
+<h3 id="keepAliveTimeout"><a href="#keepAliveTimeout" class="headerlink" title="keepAliveTimeout"></a>keepAliveTimeout</h3><p>默认值 connectionTimeout设置的值</p>
+<p>在关闭连接之前等待另一个HTTP请求的毫秒数。</p>
+<h3 id="soTimeout"><a href="#soTimeout" class="headerlink" title="soTimeout"></a>soTimeout</h3><p>等于connectionTimeout。</p>
+<h2 id="测试connectionTimeout"><a href="#测试connectionTimeout" class="headerlink" title="测试connectionTimeout"></a>测试connectionTimeout</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#将server.xml的connectionTimeout设为5s，</span><br><span class="line">nc 172.17.5.80 8080     #5s后连接断开</span><br></pre></td></tr></table></figure>
+<p>#connectionTimeout，是建立链接后等待请求的时间，不是请求超时的时间。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/2018-01-11-split/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -394,131 +522,6 @@
           
             <h3 id="mysql-split"><a href="#mysql-split" class="headerlink" title="mysql split"></a>mysql split</h3><p>mysql本身并没有split函数，我们可以实现类似功能的自定义函数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION split(</span><br><span class="line">  x VARCHAR(255),</span><br><span class="line">  delim VARCHAR(12),</span><br><span class="line">  pos INT</span><br><span class="line">)</span><br><span class="line">RETURNS VARCHAR(255)</span><br><span class="line">RETURN REPLACE(SUBSTRING(SUBSTRING_INDEX(x, delim, pos),</span><br><span class="line">       LENGTH(SUBSTRING_INDEX(x, delim, pos -1)) + 1),</span><br><span class="line">       delim, &apos;&apos;);</span><br><span class="line"></span><br><span class="line">SELECT split(&apos;a|bb|ccc|dd&apos;, &apos;|&apos;, 3) as third;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/2018-01-11-python火车票查询工具/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/11/2018-01-11-python火车票查询工具/" itemprop="url">python火车票查询工具</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T00:00:00+08:00">
-                2018-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="python库"><a href="#python库" class="headerlink" title="python库"></a>python库</h3><pre><code>pip3 install requests prettytable docopt colorama
-requests：   访问HTTP资源
-docopt：     参数解析工具
-prettytable：格式化信息打印
-colorama：   命令行着色工具
-</code></pre><h3 id="12306余票查询"><a href="#12306余票查询" class="headerlink" title="12306余票查询"></a>12306余票查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from docopt import docopt</span><br><span class="line">from prettytable import PrettyTable</span><br><span class="line">from colorama import init, Fore</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def cli(from_station,to_station,date):</span><br><span class="line">    &quot;&quot;&quot;Command-line interface&quot;&quot;&quot;</span><br><span class="line">    url = (&apos;https://kyfw.12306.cn/otn/leftTicket/queryZ?&apos;+</span><br><span class="line">           &apos;leftTicketDTO.train_date=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;leftTicketDTO.from_station=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;leftTicketDTO.to_station=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;purpose_codes=ADULT&apos;).format(</span><br><span class="line">                date, from_station, to_station</span><br><span class="line">           )</span><br><span class="line">    r = requests.get(url, verify=False)</span><br><span class="line">    TrainsCollection(r.json())</span><br><span class="line"></span><br><span class="line">def TrainsCollection(result):</span><br><span class="line">    map=result[&apos;data&apos;][&apos;map&apos;]</span><br><span class="line">    data=result[&apos;data&apos;][&apos;result&apos;]</span><br><span class="line">    header = &apos;车次 始发站 终点站 开始 结束 历时 特等 一等 二等 高级软卧 软卧 动卧 硬卧 软座 硬座 无座 其他&apos;.split()</span><br><span class="line"></span><br><span class="line">    #数据解析</span><br><span class="line">    pt=PrettyTable()</span><br><span class="line">    pt._set_field_names(header)</span><br><span class="line">    pt.padding_width = 1</span><br><span class="line">    for item in data:</span><br><span class="line">        list=item.split(&apos;|&apos;)</span><br><span class="line">        pt.add_row([list[3],Fore.RED+map[list[6]]+Fore.RESET,map[list[7]],Fore.RED+list[8]+Fore.RESET,list[9],list[10],list[32],list[31],list[30],list[22],list[23],list[25],list[26],list[27],list[28],list[29],list[24]])</span><br><span class="line">    print(pt)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    cli(&apos;YAK&apos;,&apos;JNK&apos;,&apos;2018-01-16&apos;)</span><br></pre></td></tr></table></figure>
-
           
         
       
@@ -696,6 +699,268 @@ server {
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/2018-01-11-python火车票查询工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/11/2018-01-11-python火车票查询工具/" itemprop="url">python火车票查询工具</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T00:00:00+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="python库"><a href="#python库" class="headerlink" title="python库"></a>python库</h3><pre><code>pip3 install requests prettytable docopt colorama
+requests：   访问HTTP资源
+docopt：     参数解析工具
+prettytable：格式化信息打印
+colorama：   命令行着色工具
+</code></pre><h3 id="12306余票查询"><a href="#12306余票查询" class="headerlink" title="12306余票查询"></a>12306余票查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from docopt import docopt</span><br><span class="line">from prettytable import PrettyTable</span><br><span class="line">from colorama import init, Fore</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def cli(from_station,to_station,date):</span><br><span class="line">    &quot;&quot;&quot;Command-line interface&quot;&quot;&quot;</span><br><span class="line">    url = (&apos;https://kyfw.12306.cn/otn/leftTicket/queryZ?&apos;+</span><br><span class="line">           &apos;leftTicketDTO.train_date=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;leftTicketDTO.from_station=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;leftTicketDTO.to_station=&#123;&#125;&amp;&apos;+</span><br><span class="line">           &apos;purpose_codes=ADULT&apos;).format(</span><br><span class="line">                date, from_station, to_station</span><br><span class="line">           )</span><br><span class="line">    r = requests.get(url, verify=False)</span><br><span class="line">    TrainsCollection(r.json())</span><br><span class="line"></span><br><span class="line">def TrainsCollection(result):</span><br><span class="line">    map=result[&apos;data&apos;][&apos;map&apos;]</span><br><span class="line">    data=result[&apos;data&apos;][&apos;result&apos;]</span><br><span class="line">    header = &apos;车次 始发站 终点站 开始 结束 历时 特等 一等 二等 高级软卧 软卧 动卧 硬卧 软座 硬座 无座 其他&apos;.split()</span><br><span class="line"></span><br><span class="line">    #数据解析</span><br><span class="line">    pt=PrettyTable()</span><br><span class="line">    pt._set_field_names(header)</span><br><span class="line">    pt.padding_width = 1</span><br><span class="line">    for item in data:</span><br><span class="line">        list=item.split(&apos;|&apos;)</span><br><span class="line">        pt.add_row([list[3],Fore.RED+map[list[6]]+Fore.RESET,map[list[7]],Fore.RED+list[8]+Fore.RESET,list[9],list[10],list[32],list[31],list[30],list[22],list[23],list[25],list[26],list[27],list[28],list[29],list[24]])</span><br><span class="line">    print(pt)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    cli(&apos;YAK&apos;,&apos;JNK&apos;,&apos;2018-01-16&apos;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/2018-01-11-nginx超时/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/11/2018-01-11-nginx超时/" itemprop="url">nginx超时</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T00:00:00+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h3><pre><code>http{
+    keepalive_timeout 600;
+    proxy_connect_timeout 600;
+    proxy_read_timeout 600;
+    proxy_send_timeout 600;
+    client_header_timeout 600;
+    client_body_timeout 600;
+
+}
+</code></pre><h3 id="client-header-timeout"><a href="#client-header-timeout" class="headerlink" title="client_header_timeout"></a>client_header_timeout</h3><p>默认值 60s<br>指定等待client发送一个请求头的超时时间（例如：GET / HTTP/1.1）<br>仅当在一次read中，没有收到请求头，才会算成超时。<br>如果在超时时间内，client没发送任何东西，nginx返回HTTP状态码408(“Request timed out”)</p>
+<h3 id="client-body-timeout"><a href="#client-body-timeout" class="headerlink" title="client_body_timeout"></a>client_body_timeout</h3><p>默认值 60s<br>该指令设置请求体（request body）的读超时时间。<br>仅当在一次readstep中，没有得到请求体，就会设为超时。<br>超时后，nginx返回HTTP状态码408(“Request timed out”)</p>
+<h3 id="keepalive-timeout"><a href="#keepalive-timeout" class="headerlink" title="keepalive_timeout"></a>keepalive_timeout</h3><p>默认值 75s<br>第一个参数指定了与client的keep-alive连接超时时间。服务器将会在这个时间后关闭连接。<br>可选的第二个参数指定了在响应头Keep-Alive: timeout=time中的time值。<br>这个头能够让一些浏览器主动关闭连接，这样服务器就不必要去关闭连接了。<br>没有这个参数，nginx不会发送Keep-Alive响应头（尽管并不是由这个头来决定连接是否“keep-alive”）</p>
+<h3 id="lingering-timeout"><a href="#lingering-timeout" class="headerlink" title="lingering_timeout"></a>lingering_timeout</h3><p>默认值 5s<br>lingering_close生效后，在关闭连接前，会检测是否有用户发送的数据到达服务器，<br>如果超过lingering_timeout时间后还没有数据可读，就直接关闭连接；<br>否则，必须在读取完连接缓冲区上的数据并丢弃掉后才会关闭连接。</p>
+<h3 id="resolver-timeout"><a href="#resolver-timeout" class="headerlink" title="resolver_timeout"></a>resolver_timeout</h3><p>默认值 30s<br>该指令设置DNS解析超时时间</p>
+<h3 id="proxy-connect-timeout！！！"><a href="#proxy-connect-timeout！！！" class="headerlink" title="proxy_connect_timeout！！！"></a>proxy_connect_timeout！！！</h3><p>默认值 60s<br>定义与代理服务器建立连接的超时时间。这个超时通常不能超过75秒。</p>
+<h3 id="proxy-read-timeout"><a href="#proxy-read-timeout" class="headerlink" title="proxy_read_timeout"></a>proxy_read_timeout</h3><p>默认值 60s<br>该指令设置与代理服务器的读超时时间。<br>它决定了nginx会等待多长时间来获得请求的响应。<br>这个时间不是获得整个response的时间，而是两次reading操作的时间。</p>
+<h3 id="proxy-send-timeout"><a href="#proxy-send-timeout" class="headerlink" title="proxy_send_timeout"></a>proxy_send_timeout</h3><p>默认值 60s<br>这个指定设置了发送请求给upstream服务器的超时时间。<br>超时设置不是为了整个发送期间，而是在两次write操作期间。<br>如果超时后，upstream没有收到新的数据，nginx会关闭连接</p>
+<h3 id="proxy-upstream-fail-timeout"><a href="#proxy-upstream-fail-timeout" class="headerlink" title="proxy_upstream_fail_timeout"></a>proxy_upstream_fail_timeout</h3><p>默认值 10s<br>Upstream模块下 server指令的参数，<br>设置了某一个upstream后端失败了指定次数（max_fails）后，<br>该后端不可操作的时间，默认为10秒</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/2018-01-09-python图片转字符画/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -825,7 +1090,7 @@ server {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/2017-12-28-2.centos7安装python3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/2017-12-28-centos7安装tomcat7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -844,7 +1109,7 @@ server {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/28/2017-12-28-2.centos7安装python3/" itemprop="url">2.centos7安装python3</a></h1>
+                <a class="post-title-link" href="/2017/12/28/2017-12-28-centos7安装tomcat7/" itemprop="url">centos7安装tomcat7</a></h1>
         
 
         <div class="post-meta">
@@ -896,23 +1161,21 @@ server {
       
         
           
-            <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><pre><code>yum install -y nc
-yum install -y gcc
-yum install -y openssl-devel
-</code></pre><h2 id="下载python3-6"><a href="#下载python3-6" class="headerlink" title="下载python3.6"></a>下载python3.6</h2><pre><code>wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
-</code></pre><h2 id="解压、安装"><a href="#解压、安装" class="headerlink" title="解压、安装"></a>解压、安装</h2><pre><code>tar -zxvf Python-3.6.4.tgz
-cd Python-3.6.4
-./configure --prefix=/opt/python --enable-shared
-make &amp;&amp; make install
-cd ~/Python-3.6.4 &amp;&amp; cp libpython3.6m.so.1.0 /usr/lib &amp;&amp; cp libpython3.6m.so.1.0 /usr/lib64
-</code></pre><h2 id="把python3设为默认"><a href="#把python3设为默认" class="headerlink" title="把python3设为默认"></a>把python3设为默认</h2><pre><code>mv /usr/bin/python /usr/bin/pythonbk
-ln -s /opt/python/bin/python3.6 /usr/bin/python
-ln -s /opt/python/bin/pip3 /usr/local/bin/pip3
-vi /usr/bin/yum
-</code></pre><p>#修改前</p>
-<pre><code>#!/usr/bin/python
-#修改后（系统默认python版本）
-#!/usr/bin/python2.6
+            <h3 id="安装tomcat7"><a href="#安装tomcat7" class="headerlink" title="安装tomcat7"></a>安装tomcat7</h3><pre><code>wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.82/bin/apache-tomcat-7.0.82.tar.gz
+tar zxvf apache-tomcat-7.0.82.tar.gz
+mv apache-tomcat-7.0.82 /usr/local/tomcat7
+cd /usr/local/tomcat7/
+</code></pre><h3 id="设置用户名、密码"><a href="#设置用户名、密码" class="headerlink" title="设置用户名、密码"></a>设置用户名、密码</h3><pre><code>cd conf &amp;&amp; vi tomcat-users.xml
+    &lt;role rolename=&quot;manager-gui&quot;/&gt;
+    &lt;user username=&quot;tomcat&quot; password=&quot;tomcat&quot; roles=&quot;manager-gui&quot;/&gt;
+</code></pre><h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><pre><code>#centos6
+service iptables stop
+chkconfig iptables off
+
+#centos7
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+</code></pre><h2 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h2><pre><code>/usr/local/tomcat7/bin/startup.sh
 </code></pre>
           
         
@@ -1082,7 +1345,7 @@ vi /usr/bin/yum
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/2017-12-28-centos7安装tomcat7/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/2017-12-28-2.centos7安装python3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1101,7 +1364,7 @@ vi /usr/bin/yum
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/28/2017-12-28-centos7安装tomcat7/" itemprop="url">centos7安装tomcat7</a></h1>
+                <a class="post-title-link" href="/2017/12/28/2017-12-28-2.centos7安装python3/" itemprop="url">2.centos7安装python3</a></h1>
         
 
         <div class="post-meta">
@@ -1153,21 +1416,23 @@ vi /usr/bin/yum
       
         
           
-            <h3 id="安装tomcat7"><a href="#安装tomcat7" class="headerlink" title="安装tomcat7"></a>安装tomcat7</h3><pre><code>wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.82/bin/apache-tomcat-7.0.82.tar.gz
-tar zxvf apache-tomcat-7.0.82.tar.gz
-mv apache-tomcat-7.0.82 /usr/local/tomcat7
-cd /usr/local/tomcat7/
-</code></pre><h3 id="设置用户名、密码"><a href="#设置用户名、密码" class="headerlink" title="设置用户名、密码"></a>设置用户名、密码</h3><pre><code>cd conf &amp;&amp; vi tomcat-users.xml
-    &lt;role rolename=&quot;manager-gui&quot;/&gt;
-    &lt;user username=&quot;tomcat&quot; password=&quot;tomcat&quot; roles=&quot;manager-gui&quot;/&gt;
-</code></pre><h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><pre><code>#centos6
-service iptables stop
-chkconfig iptables off
-
-#centos7
-systemctl stop firewalld.service #停止firewall
-systemctl disable firewalld.service #禁止firewall开机启动
-</code></pre><h2 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h2><pre><code>/usr/local/tomcat7/bin/startup.sh
+            <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><pre><code>yum install -y nc
+yum install -y gcc
+yum install -y openssl-devel
+</code></pre><h2 id="下载python3-6"><a href="#下载python3-6" class="headerlink" title="下载python3.6"></a>下载python3.6</h2><pre><code>wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
+</code></pre><h2 id="解压、安装"><a href="#解压、安装" class="headerlink" title="解压、安装"></a>解压、安装</h2><pre><code>tar -zxvf Python-3.6.4.tgz
+cd Python-3.6.4
+./configure --prefix=/opt/python --enable-shared
+make &amp;&amp; make install
+cd ~/Python-3.6.4 &amp;&amp; cp libpython3.6m.so.1.0 /usr/lib &amp;&amp; cp libpython3.6m.so.1.0 /usr/lib64
+</code></pre><h2 id="把python3设为默认"><a href="#把python3设为默认" class="headerlink" title="把python3设为默认"></a>把python3设为默认</h2><pre><code>mv /usr/bin/python /usr/bin/pythonbk
+ln -s /opt/python/bin/python3.6 /usr/bin/python
+ln -s /opt/python/bin/pip3 /usr/local/bin/pip3
+vi /usr/bin/yum
+</code></pre><p>#修改前</p>
+<pre><code>#!/usr/bin/python
+#修改后（系统默认python版本）
+#!/usr/bin/python2.6
 </code></pre>
           
         
@@ -1449,245 +1714,6 @@ chkconfig nginx on
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Android Studio显示行数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-Android Studio显示行数/" itemprop="url">Android Studio显示行数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="打开setting，输入line检索，勾选Show-line-numbers"><a href="#打开setting，输入line检索，勾选Show-line-numbers" class="headerlink" title="打开setting，输入line检索，勾选Show line numbers"></a>打开setting，输入line检索，勾选Show line numbers</h3><p><img src="http://img.blog.csdn.net/20170307215601757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGVsbG9fenln/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-batch_SQL Server 同期数据到Postgres/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-batch_SQL Server 同期数据到Postgres/" itemprop="url">batch_SQL Server 同期数据到Postgres</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	#!/bin/bash -xv</span><br><span class="line">	# 从SQL Server 同期数据到Postgres</span><br><span class="line">	export PATH=/home/SMART_TRIAL:/home/SMART:/usr/local/bin:/$&#123;PATH&#125;</span><br><span class="line">	export LANG=ja_JP.UTF-8</span><br><span class="line"></span><br><span class="line">&gt;マスタファイル開く</span><br><span class="line"></span><br><span class="line">	#1.SQLIP</span><br><span class="line">	#2.SQLDB名</span><br><span class="line">	#3.SQLUserGroup(dbo)</span><br><span class="line">	#4.SQLテーブル名</span><br><span class="line">	#5.SQL接続ユーザー名</span><br><span class="line">	#6.SQL接続パスワード</span><br><span class="line">	#7.日付列</span><br><span class="line">	cat /tmp/baihen/tablelist_kanzen | head -n 2 |</span><br><span class="line">		while read svip dbname ugp tname user pwd cols;</span><br><span class="line">	do</span><br><span class="line"></span><br><span class="line">&gt;Step1.SQLからデータ抽出</span><br><span class="line"></span><br><span class="line">	#	echo &quot;select * from &quot;$&#123;tname&#125;&quot; with (nolock)&quot; 	|</span><br><span class="line">	#	java -jar /home/SMART_TRIAL/jd2s.jar -s$&#123;svip&#125;:$&#123;dbname&#125;:$&#123;user&#125;:$&#123;pwd&#125; -q-	 &gt;/tmp/baihen/table_$&#123;tname&#125;</span><br><span class="line">	#	deom: echo &quot;select top 10 * from M_DATE &quot; | java -jar /home/SMART_TRIAL/jd2s.jar -s172.17.254.213:dbcyber:sa:1234 -q- &gt;/tmp/M_DATE</span><br><span class="line">	echo &quot;select * from dbcyber.dbo.NaFuDaPrintHistory where CONVERT(CHAR(8), registered, 112) = 20170208&quot; | java -jar /home/SMART_TRIAL/jd2s.jar -s10.100.2.118:dbcyber:sa:dbadmin -q- &gt;/tmp/10.100.2.118</span><br><span class="line">&gt;Step2.日付列の特殊処理</span><br><span class="line"></span><br><span class="line">	cp /tmp/baihen/table_$&#123;tname&#125; /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line"></span><br><span class="line">	if [ $cols != &quot;0&quot; ] ; then</span><br><span class="line">		echo $&#123;cols&#125; | sed s/_/ /g | tov |</span><br><span class="line">		while read num ; do</span><br><span class="line">		echo $&#123;num&#125;</span><br><span class="line"></span><br><span class="line">		#cat /tmp/baihen/table_$&#123;tname&#125;_tmp | awk $&quot;$&#123;num&#125;&quot;=($&quot;$&#123;num&#125;&quot;==&quot;19000101000000&quot;?&quot;_&quot;:substr($&quot;$&#123;num&#125;&quot;,1,4)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,5,2)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,7,2)&quot;_&quot;substr($&quot;$&#123;num&#125;&quot;,9,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,11,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,13,2)) &gt;/tmp/baihen/tmp</span><br><span class="line"></span><br><span class="line">		cat /tmp/baihen/table_$&#123;tname&#125;_tmp | awk $&quot;$&#123;num&#125;&quot;=substr($&quot;$&#123;num&#125;&quot;,1,4)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,5,2)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,7,2)&quot;_&quot;substr($&quot;$&#123;num&#125;&quot;,9,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,11,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,13,2) &gt;/tmp/baihen/tmp</span><br><span class="line">		mv /tmp/baihen/tmp /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line">		done</span><br><span class="line"></span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">&gt;Step3.そのた処理</span><br><span class="line"></span><br><span class="line">	cat /tmp/baihen/table_$&#123;tname&#125;_tmp | sed s/ /,/g;s/_/ /g;s/, ,/,\\N,/g;s/, ,/,\\N,/g;s/, /,\\N/g | gzip -cf &gt;table_$&#123;tname&#125;.gz</span><br><span class="line"></span><br><span class="line">	rm /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line"></span><br><span class="line">&gt;Step4.処理後のPostgreへINPUTのファイルをPostgreサーバーへ送付(圧縮ファイルで送付してから解凍)</span><br><span class="line"></span><br><span class="line">	scp table_$&#123;tname&#125;.gz root@10.100.2.90:/tmp/data</span><br><span class="line">	ssh -n root@10.100.2.90 &quot;gunzip /tmp/data/table_$&#123;tname&#125;.gz&quot;</span><br><span class="line"></span><br><span class="line">&gt;Step5.Postgreへ投入対象テーブルクリアして、データ投入</span><br><span class="line"></span><br><span class="line">	ssh -n root@10.100.2.90 &quot; /opt/postgres/9.3/bin/psql -U postgres -d $&#123;dbname&#125;  -t -p 5432 -c \&quot;truncate table $&#123;tname&#125; ; copy $&#123;tname&#125; from /tmp/data/table_$&#123;tname&#125; DELIMITER ,;\&quot;&quot;</span><br><span class="line"></span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	exit 0</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1742,7 +1768,7 @@ chkconfig nginx on
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1764,7 +1790,7 @@ chkconfig nginx on
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

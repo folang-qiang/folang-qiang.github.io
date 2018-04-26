@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-adb模拟用户登录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-sql转psql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -340,7 +340,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-adb模拟用户登录/" itemprop="url">adb模拟用户登录</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-sql转psql/" itemprop="url">sql转psql</a></h1>
         
 
         <div class="post-meta">
@@ -392,18 +392,76 @@
       
         
           
-            <h3 id="1-登录"><a href="#1-登录" class="headerlink" title="1.登录"></a>1.登录</h3><pre><code>adb -s 10.6.4.136 shell input tap 360 720
-sleep 1
-</code></pre><h3 id="2-手入力"><a href="#2-手入力" class="headerlink" title="2.手入力"></a>2.手入力</h3><pre><code>adb  -s 10.6.4.136 shell input tap 360 700
-adb  -s 10.6.4.136 shell input text &quot;10085467&quot;
-adb  -s 10.6.4.136 shell input tap 600 1250
-adb  -s 10.6.4.136 shell input text &quot;zyg122401&quot;
-adb  -s 10.6.4.136 shell input tap 600 1250
-sleep 1
-</code></pre><h3 id="3-退出"><a href="#3-退出" class="headerlink" title="3.退出"></a>3.退出</h3><pre><code>adb  -s 10.6.4.136 shell input tap 600 1100
-adb  -s 10.6.4.136 shell input tap 250 800
-sleep 1
-echo 1
+            <h2 id="1-日期转换"><a href="#1-日期转换" class="headerlink" title="1.日期转换"></a>1.日期转换</h2><pre><code>CONVERT(VARCHAR(10),GetDate(),23))
+
+to_char(now(),yyyy-MM-dd)
+
+extract(year from now());
+</code></pre><h2 id="2-日期加减"><a href="#2-日期加减" class="headerlink" title="2.日期加减"></a>2.日期加减</h2><pre><code>表示三天后
+
+select now() + interval 3 day;
+
+select to_char(now() + interval 7 day,yyyy-MM-dd)
+
+每月最后一天
+
+select  (to_char(now()+ interval 1 month ,yyyy-MM-) || 01 ) :: date - interval 1 day
+</code></pre><h2 id="3-使用游标"><a href="#3-使用游标" class="headerlink" title="3.使用游标"></a>3.使用游标</h2><pre><code>open v_result2 for SELECT * FROM tempJAN;
+
+return next v_result2;
+</code></pre><h2 id="4-isNULL-–-gt-COALESCE"><a href="#4-isNULL-–-gt-COALESCE" class="headerlink" title="4.isNULL –&gt; COALESCE"></a>4.isNULL –&gt; COALESCE</h2><p>5.@ –&gt; v_</p>
+<p>6.[]</p>
+<p>7.len –&gt; length</p>
+<p>8.删除临时表</p>
+<pre><code>if  exists( select * from information_schema.tables  where table_schema like pg_temp%  and table_name = lower(TempCompanyMsg) )
+
+then
+
+    drop table TempCompanyMsg;
+
+end if;
+
+CREATE temp table TempScore AS
+</code></pre><h2 id="9-dbo-–-gt-management"><a href="#9-dbo-–-gt-management" class="headerlink" title="9.dbo –&gt; management"></a>9.dbo –&gt; management</h2><p>10.CHARINDEX –&gt; POSITION(/-/ in v_ORDER_NUM_STR);</p>
+<p>11.获取日期</p>
+<pre><code>DATEDIFF
+
+extract(month from now());
+</code></pre><h2 id="12-查看游标内容"><a href="#12-查看游标内容" class="headerlink" title="12.查看游标内容"></a>12.查看游标内容</h2><pre><code>BEGIN ;
+
+select * from mdifdb.proc_md_BranchProductInfoReferWeb(4,4901331009,%%,%%,%%,,,,,,,,,,,,);
+
+fetch all in &quot;&lt;unnamed portal 1&gt;&quot;
+
+END ;
+</code></pre><h2 id="13-DATEDIFF"><a href="#13-DATEDIFF" class="headerlink" title="13.DATEDIFF"></a>13.DATEDIFF</h2><pre><code>date_part(day, 2015-01-15 17:05::timestamp - 2013-01-14 16:05::timestamp);
+</code></pre><h2 id="14-Round-KCountItem-1-0-SumCountItem-2-1"><a href="#14-Round-KCountItem-1-0-SumCountItem-2-1" class="headerlink" title="14.Round((KCountItem*1.0/SumCountItem),2,1)"></a>14.Round((KCountItem*1.0/SumCountItem),2,1)</h2><pre><code>trunc((KCountItem*1.0/SumCountItem),2)
+</code></pre><h2 id="15-返回结果集"><a href="#15-返回结果集" class="headerlink" title="15.返回结果集"></a>15.返回结果集</h2><pre><code>FOR v_rec IN
+
+    SELECT
+
+        id, branchcd, productcd, productname_read, brandname, specname_read,
+
+        makerprodcd, departmentcd, colorname, sizename, innercaseqty,
+
+            caseqty, orderunit, deliveryqty, costprice, salesprice, costsum,
+
+            salessum, suppliercd, suppliername, deliverydate, empcd, empname,
+
+            commitflag, author, registered, maintainer, modified,istransfer,slipno,slipprocessno
+
+    FROM delivery.deliveryinfo_transfer
+
+    WHERE istransfer = 0  OR istransfer IS NOT NULL
+
+LOOP
+
+RETURN NEXT v_rec;
+
+END LOOP;
+</code></pre><h2 id="16-截取ip前3段"><a href="#16-截取ip前3段" class="headerlink" title="16.截取ip前3段"></a>16.截取ip前3段</h2><pre><code>split_part(v_network_ip,&apos;.&apos;,1)
+
+substring(v_serverip from &apos;[0-9]+.[0-9]+.[0-9]+&apos;)
 </code></pre>
           
         
@@ -452,7 +510,7 @@ echo 1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Centos 7 调整root分区/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-Android Studio修改logcat行数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -471,7 +529,7 @@ echo 1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-Centos 7 调整root分区/" itemprop="url">Centos 7 调整root分区</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-Android Studio修改logcat行数/" itemprop="url">Android Studio修改logcat行数</a></h1>
         
 
         <div class="post-meta">
@@ -523,52 +581,11 @@ echo 1
       
         
           
-            <p>把/home内容备份，然后将/home文件系统所在的逻辑卷删除，扩大/root文件系统，新建/home ，恢复/home内容</p>
-<h2 id="扩大root分区"><a href="#扩大root分区" class="headerlink" title="扩大root分区"></a>扩大root分区</h2><pre><code>#1.查看分区
-
-    df -h
-
-#2.备份home分区文件
-
-    tar cvf /tmp/home.tar /home
-
-#3.卸载/home，如果无法卸载，先终止使用/home文件系统的进程
-
-    fuser -km /home/
-
-    umount /home
-
-#4.删除/home所在的lv
-
-    lvremove /dev/mapper/centos-home
-
-#5.扩展/root所在的lv，增加100G
-
-    lvextend -L +100G /dev/mapper/centos-root
-
-#6.扩展/root文件系统
-
-    xfs_growfs /dev/mapper/centos-root
-
-#7.重新创建home lv
-
-    lvcreate -L 50G -n /dev/mapper/centos-home
-
-#8. 创建文件系统
-
-    mkfs.xfs  /dev/mapper/centos-home
-
-#9.挂载home
-
-    mount /dev/mapper/centos-home
-
-#10.home文件恢复
-
-    tar xvf /tmp/home.tar -C /home/
-
-    cd /home/home/
-
-    mv * ../
+            <h3 id="修改logcat的缓存大小"><a href="#修改logcat的缓存大小" class="headerlink" title="修改logcat的缓存大小"></a>修改logcat的缓存大小</h3><pre><code>#bin\idea.properties
+vi /Applications/DataGrip.app/Contents/bin/idea.properties
+    idea.cycle.buffer.size=1024
+    替换为
+    idea.cycle.buffer.size=102400
 </code></pre>
           
         
@@ -617,7 +634,7 @@ echo 1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-batch_判断手机adb连接/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-负载平衡/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -636,7 +653,7 @@ echo 1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-batch_判断手机adb连接/" itemprop="url">batch_判断手机adb连接</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-负载平衡/" itemprop="url">负载平衡</a></h1>
         
 
         <div class="post-meta">
@@ -688,186 +705,67 @@ echo 1
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># 判断pacer是不是开机</span><br><span class="line"></span><br><span class="line">for i in `seq 254`</span><br><span class="line">do</span><br><span class="line">    ip=192.168.126.$i</span><br><span class="line">    nc -z $ip 5555 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">    [ $? -eq 0 ] &amp;&amp; echo &quot;$ip is alive&quot;  || echo &quot;&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
+            <p>浏览器    –&gt;     nginx    –&gt;   Tomcat</p>
+<h2 id="1-代理转发"><a href="#1-代理转发" class="headerlink" title="1.代理转发"></a>1.代理转发</h2><pre><code>location / {
+    # root html;
+    index index.html index.htm;
+    proxy-pass http://192.168.1.62:8080; #代理转发
+}
+</code></pre><h2 id="2-nginx策略"><a href="#2-nginx策略" class="headerlink" title="2.nginx策略"></a>2.nginx策略</h2><pre><code>nginx  --&gt;   策略   Tomcat1
+                    Tomcat2
+                    Tomcat3
+</code></pre><p>1）策略</p>
+<pre><code>多个服务器，形成服务器组
 
-    
+指定转给组
 
-    
+策略决定发给谁
+</code></pre><p>2）一组服务器</p>
+<pre><code>upstream tomcats{
 
-    
+    server    192.168.1.62:8080;
 
-    <footer class="post-footer">
-      
+    server     192.168.1.63:8080;
 
-      
+}
+</code></pre><p>3）策略</p>
+<pre><code>默认：    轮询，1,2,1,2
 
-      
+backup:    只有非备份机都挂机，才启动
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+dwon:    当前服务器停止（暂时停机维护）
+
+max-fails:        最大失败次数
+
+fail-timeout:    挂机多长时间再尝试
 
 
-    
-      
 
-  
+1.weight 权重
 
-  
-  
-  
+    server 192.168.1.64:8080 weight=5; #指定权重
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-eclipse常用快捷键/">
+2.ip_hash
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
+    客户端ip_hash运算，用户锁定在服务器
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
+    权重失效
 
-    
-      <header class="post-header">
+3.fail
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-eclipse常用快捷键/" itemprop="url">eclipse常用快捷键</a></h1>
-        
+    根据服务器当前性能，动态分配
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
+4.url_hash
 
-            
+    请求url，hash运算，相同url访问同一服务器
 
-            
-          </span>
+    做缓存服务器，每个商品都是独一的
 
-          
+    每个服务器缓存不同商品
 
-          
-            
-          
 
-          
-          
 
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Eclipse-快捷键"><a href="#Eclipse-快捷键" class="headerlink" title="Eclipse 快捷键"></a>Eclipse 快捷键</h2><pre><code>编辑
-
-Ctrl+1 快速修复（比如import类、try catch等）
-
-Ctrl+Shift+F 格式化当前代码
-
-Ctrl+Shift+M 导入import
-
-Ctrl+Shift+O 去除多余import
-
-Alt+/         内容辅助
-
-Ctrl+Alt+↓     复制当前行到下一行（复制增加）
-
-Ctrl+Alt+↑     复制当前行到上一行（复制增加）
-
-选择
-
-Alt+Shift+↑    选择封装元素
-
-Alt+Shift+←    选择上一个元素
-
-Alt+Shift+→    选择下一个元素
-
-搜索
-
-Ctrl+J    查找
-
-Ctrl+Shift+U    列出所有包含字符串的行
-
-Ctrl+G            工作区声明
-
-Ctrl+Shift+G     工作区引用
-
-Ctrl+Shift+T     搜索类
-
-Ctrl+Shift+R    搜索文件
-
-Ctrl+E          打开当前文件列表
-
-Ctrl+PageUp/PageDown    切换已经打开的文件
-
-调试
-
-Ctrl+Shift+D     显示变量值
-
-Ctrl+Shift+B    设断点
-
-Ctrl+R            运行至(节省很多断点)
-
-重构
-
-Alt+Shift+R        重命名
-
-Alt+Shift+M        抽取方法
-
-其他
-
-Ctrl+M            最大化当前View
-
-Ctrl+W            关闭当前View
+        加快访问速度
 </code></pre>
           
         
@@ -916,7 +814,7 @@ Ctrl+W            关闭当前View
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-eclipse修改workspace/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-获取MAC地址/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -935,7 +833,7 @@ Ctrl+W            关闭当前View
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-eclipse修改workspace/" itemprop="url">eclipse修改workspace</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-获取MAC地址/" itemprop="url">获取MAC地址</a></h1>
         
 
         <div class="post-meta">
@@ -987,7 +885,126 @@ Ctrl+W            关闭当前View
       
         
           
-            <h2 id="打开preference，输入workspace检索，勾选Prompt-workspace-on-startup"><a href="#打开preference，输入workspace检索，勾选Prompt-workspace-on-startup" class="headerlink" title="打开preference，输入workspace检索，勾选Prompt workspace on startup"></a>打开preference，输入workspace检索，勾选Prompt workspace on startup</h2><p><img src="http://img.blog.csdn.net/20170308113506399?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGVsbG9fenln/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;&gt;&lt;/uses-permission&gt;</span><br><span class="line"></span><br><span class="line">WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);</span><br><span class="line">WifiInfo info = wifi.getConnectionInfo();</span><br><span class="line">return info.getMacAddress();</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-挂载硬盘/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-挂载硬盘/" itemprop="url">挂载硬盘</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mount -t ntfs-3g /dev/sdb1 /mnt/</p>
 
           
         
@@ -1036,7 +1053,7 @@ Ctrl+W            关闭当前View
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-ftp上传/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-环境变量path误删解决办法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1055,7 +1072,7 @@ Ctrl+W            关闭当前View
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-ftp上传/" itemprop="url">ftp上传</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-环境变量path误删解决办法/" itemprop="url">环境变量path误删解决办法</a></h1>
         
 
         <div class="post-meta">
@@ -1107,17 +1124,271 @@ Ctrl+W            关闭当前View
       
         
           
-            <h3 id="ftp上传文件"><a href="#ftp上传文件" class="headerlink" title="ftp上传文件"></a>ftp上传文件</h3><p>   ftp -s:ftp1.bat</p>
-<pre><code>open 192.168.4.104
-anonymous
-anonymous
-lcd AppData\Roaming\MicroSIP
-cd SIP
-binary
-get Contacts.xml
-get MicroSIP.ini
-Close
-quit
+            <h3 id="1-打开注册表"><a href="#1-打开注册表" class="headerlink" title="1.打开注册表"></a>1.打开注册表</h3><p>Win+R 输入regedit打开注册表(开始-运行里输入regedit）</p>
+<p>找到  HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control\Session Manager\Environment下，</p>
+<h3 id="2-新建path"><a href="#2-新建path" class="headerlink" title="2.新建path"></a>2.新建path</h3><p>右边找到path，把数值复制到HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment下，</p>
+<p>若没有path可以新建,然后把值对应复制进去.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-查看sqlite数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-查看sqlite数据库/" itemprop="url">查看sqlite数据库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">run-as com.tre.android.framework(app的package名）</span><br><span class="line">cd databases</span><br><span class="line">ls</span><br><span class="line">sqlite3 pacerplayer.db</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-建立外部表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-建立外部表/" itemprop="url">建立外部表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="建立外部表"><a href="#建立外部表" class="headerlink" title="建立外部表"></a>建立外部表</h2><pre><code>--安装postgres_fdw
+
+CREATE EXTENSION postgres_fdw
+
+--新建远程数据库
+
+create server masterdb foreign data wrapper postgres_fdw options (host localhost,dbname MasterDB,port 5432) ;
+
+--新建用户
+
+create user mapping FOR postgres server masterdb options (user postgres,password sa) ;
+
+--建立外部表
+
+CREATE FOREIGN TABLE branches
+
+   (branchcd integer ,
+
+    branchname character varying(64) ,
+
+    branchtype integer NOT NULL)
+
+   SERVER masterdb;
 </code></pre>
           
         
@@ -1166,7 +1437,7 @@ quit
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-md5 authentication failed/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-关闭防火墙/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1185,7 +1456,7 @@ quit
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-md5 authentication failed/" itemprop="url">md5 authentication failed</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-关闭防火墙/" itemprop="url">关闭防火墙</a></h1>
         
 
         <div class="post-meta">
@@ -1237,16 +1508,22 @@ quit
       
         
           
-            <p>Unable to connect to server:</p>
-<p>ERROR: md5 authentication failed</p>
-<p>DETAIL: password does not match</p>
-<h2 id="1-执行sql语句-获取用户md5"><a href="#1-执行sql语句-获取用户md5" class="headerlink" title="1.执行sql语句,获取用户md5"></a>1.执行sql语句,获取用户md5</h2><pre><code>select rolname,rolpassword from pg_authid
-</code></pre><h2 id="2-pgpool添加用户"><a href="#2-pgpool添加用户" class="headerlink" title="2.pgpool添加用户"></a>2.pgpool添加用户</h2><pre><code>cd /etc/pgpool-II
+            <h2 id="1-重启后生效"><a href="#1-重启后生效" class="headerlink" title="1) 重启后生效"></a>1) 重启后生效</h2><pre><code>开启： chkconfig iptables on
 
-vi pool_passwd
+关闭： chkconfig iptables off
+</code></pre><h2 id="2-即时生效，重启后失效"><a href="#2-即时生效，重启后失效" class="headerlink" title="2) 即时生效，重启后失效"></a>2) 即时生效，重启后失效</h2><pre><code>开启： service iptables start
 
-    postgres:md52a8e01d8bbbc4bfff072e0eb3e47e35f
-</code></pre><h2 id="3-重新加载配置文件"><a href="#3-重新加载配置文件" class="headerlink" title="3.重新加载配置文件"></a>3.重新加载配置文件</h2><pre><code>pgpool -F pool_passwd reload
+关闭： service iptables stop
+</code></pre><h2 id="centos-7："><a href="#centos-7：" class="headerlink" title="centos 7："></a>centos 7：</h2><pre><code>systemctl stop firewalld.service #停止
+
+systemctl disable firewalld.service #禁用.
+</code></pre><h2 id="3-postgres-5432不能连接"><a href="#3-postgres-5432不能连接" class="headerlink" title="3) postgres 5432不能连接"></a>3) postgres 5432不能连接</h2><pre><code>nc -z 192.168.4.224 5432 fail
+
+iptables属于系统服务，netstat找不到
+
+解决方法：
+
+iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
 </code></pre>
           
         
@@ -1295,7 +1572,7 @@ vi pool_passwd
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-pgpool命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-关闭ipv6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1314,7 +1591,7 @@ vi pool_passwd
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-pgpool命令/" itemprop="url">pgpool命令</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-关闭ipv6/" itemprop="url">关闭ipv6</a></h1>
         
 
         <div class="post-meta">
@@ -1366,381 +1643,7 @@ vi pool_passwd
       
         
           
-            <h2 id="查询锁："><a href="#查询锁：" class="headerlink" title="查询锁："></a>查询锁：</h2><pre><code>SELECT
-
-    locked.pid AS locked_pid,
-
-    locker.pid AS locker_pid,
-
-    locked_act.usename AS locked_user,
-
-    locker_act.usename AS locker_user,
-
-    locked.virtualtransaction,
-
-    locked.transactionid,
-
-    relname
-
-FROM
-
-    pg_locks locked
-
-    LEFT OUTER JOIN pg_class ON (locked.relation = pg_class.oid),
-
-    pg_locks locker,
-
-    pg_stat_activity locked_act,
-
-    pg_stat_activity locker_act
-
-WHERE
-
-    locker.granted=true AND
-
-    locked.granted=false AND
-
-    locked.pid=locked_act.pid AND
-
-    locker.pid=locker_act.pid AND
-
-    locked.relation=locker.relation;
-
----------------------
-
-select * from pg_stat_activity aa,
-
-(
-
-    select a.locktype,a.database,a.pid,a.mode,a.relation,b.relname from pg_locks a join pg_class b on a.relation=b.oid
-
- where upper(b.relname)=FX_WDSJ_DSZH
-
-) bb
-
-where aa.pid=bb.pid
-
- and aa.waiting=t
-</code></pre><h2 id="–查询是否锁表了"><a href="#–查询是否锁表了" class="headerlink" title="–查询是否锁表了"></a>–查询是否锁表了</h2><pre><code>select pid from pg_locks where relation=(select oid from pg_class where relname=表);
-
- tb_cyplate_localitycheck
-</code></pre><h2 id="查询proc："><a href="#查询proc：" class="headerlink" title="查询proc："></a>查询proc：</h2><pre><code>select proname --, prosrc
-
-from pg_proc where LOWER(prosrc) like %join% and CHAR_LENGTH(prosrc) ##  100;
-</code></pre><h2 id="查询连接："><a href="#查询连接：" class="headerlink" title="查询连接："></a>查询连接：</h2><pre><code>SELECT * FROM pg_stat_activity
-</code></pre><h2 id="查询正在执行的语句："><a href="#查询正在执行的语句：" class="headerlink" title="查询正在执行的语句："></a>查询正在执行的语句：</h2><pre><code>select * from pg_stat_activity where waiting=t;
-
-
-
-kill pid：
-
-select pg_cancel_backend(16023);
-
-select  pg_terminate_backend(16023);
-</code></pre><h2 id="查询备机延迟："><a href="#查询备机延迟：" class="headerlink" title="查询备机延迟："></a>查询备机延迟：</h2><pre><code>select now()-pg_last_xact_replay_timestamp()
-</code></pre><h2 id="查询备机："><a href="#查询备机：" class="headerlink" title="查询备机："></a>查询备机：</h2><pre><code>select * from pg_stat_replication;
-
-/opt/postgres/9.3/bin/psql -U postgres -p 5432 -c &quot;select * from pg_stat_replication;&quot;
-</code></pre><h2 id="查询语句log："><a href="#查询语句log：" class="headerlink" title="查询语句log："></a>查询语句log：</h2><pre><code>select * from pg_stat_statements
-
-where query like %tttt%;
-</code></pre><h2 id="清除语句log："><a href="#清除语句log：" class="headerlink" title="清除语句log："></a>清除语句log：</h2><pre><code>SELECT pg_stat_statements_reset();
-</code></pre><h2 id="显示同步备机名："><a href="#显示同步备机名：" class="headerlink" title="显示同步备机名："></a>显示同步备机名：</h2><pre><code>show synchronous_standby_names
-
-
-
-pgagent:
-
-/opt/pgagent/bin/pgagent hostaddr=localhost dbname=postgres user=postgres
-
-
-
-pgpool:
-
-/opt/postgres/9.3/bin/psql -U postgres -p 9999 -c &quot;show pool_nodes;&quot;
-</code></pre><h2 id="查看主pgpool"><a href="#查看主pgpool" class="headerlink" title="查看主pgpool"></a>查看主pgpool</h2><pre><code>pcp_watchdog_info 10 10.2.4.90 9898 postgres sa
-
-pcp_watchdog_info 10 10.2.4.90 9898 postgres sa 0
-</code></pre><h2 id="添加pgpool节点"><a href="#添加pgpool节点" class="headerlink" title="添加pgpool节点"></a>添加pgpool节点</h2><pre><code>pcp_attach_node  10  localhost  9898  postgres  sa  0
-</code></pre><h2 id="删除pgpool节点"><a href="#删除pgpool节点" class="headerlink" title="删除pgpool节点"></a>删除pgpool节点</h2><pre><code>pcp_detach_node  10  localhost  9898  postgres  sa  0
-</code></pre><h2 id="停止pgpool"><a href="#停止pgpool" class="headerlink" title="停止pgpool"></a>停止pgpool</h2><pre><code>pcp_stop_pgpool  10  localhost  9898  postgres  sa  s
-
-pcp_stop_pgpool  10  localhost  9898  postgres  sa  f
-
-pcp_stop_pgpool  10  localhost  9898  postgres  sa  i
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-pgpool添加用户/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-pgpool添加用户/" itemprop="url">pgpool添加用户</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-pgpool添加用户"><a href="#1-pgpool添加用户" class="headerlink" title="1.pgpool添加用户"></a>1.pgpool添加用户</h2><pre><code>cd /etc/pgpool-II
-
-vi pool_passwd
-</code></pre><h2 id="2-执行sql语句-获取md5"><a href="#2-执行sql语句-获取md5" class="headerlink" title="2.执行sql语句,获取md5"></a>2.执行sql语句,获取md5</h2><pre><code>select rolname,rolpassword from pg_authid
-
-vi pool_passwd
-
-    appforpacer:md5e72cd3feac7ea1a6b372aa8a5fec0a7f
-</code></pre><h2 id="3-重新启动pgpool"><a href="#3-重新启动pgpool" class="headerlink" title="3.重新启动pgpool"></a>3.重新启动pgpool</h2><pre><code>ps -ef | grep pgpool | grep -v grep  | awk &apos;{system(&quot;kill -9 &quot; $2)}&apos;;
-
-rm -f /tmp/.s.PGSQL.9999 /tmp/.s.PGSQL.9898
-
-pgpool
-
-1)启动失败,10.100.2.89被占用
-
-    ifconfig etho0:0 down
-
-    pgpool
-</code></pre><h2 id="4-重新加载配置文件"><a href="#4-重新加载配置文件" class="headerlink" title="4.重新加载配置文件"></a>4.重新加载配置文件</h2><pre><code>pgpool [-c][-f config_file][-a hba_file][-F pcp_config_file] reload
-
-pgpool -F pool_passwd reload
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-scp免密码传输/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-scp免密码传输/" itemprop="url">scp免密码传输</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>配置ssh信任访问                        </p>
-<pre><code>主机：    172.17.254.90                
-cd ~/.ssh                    
-ssh-keygen -t rsa                    
-cat id_rsa.pub &gt;&gt;authorized_keys                 本机ssh信任    
-ssh-copy-id -i root@172.17.254.91                他机ssh信任    
-
-备机：    172.17.254.91                
-cd ~/.ssh                    
-ssh-keygen -t rsa                    
-cat id_rsa.pub &gt;&gt;authorized_keys                 本机ssh信任    
-ssh-copy-id -i root@172.17.254.90                他机ssh信任    
-</code></pre>
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br><span class="line">	net.ipv6.conf.all.disable_ipv6=1</span><br><span class="line">vi /etc/sysconfig/network</span><br><span class="line">	NETWORKING_IPV6=no</span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ethX</span><br><span class="line">	IPV6INIT=no</span><br><span class="line">service network restart</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1829,7 +1732,7 @@ ssh-copy-id -i root@172.17.254.90                他机ssh信任
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1851,7 +1754,7 @@ ssh-copy-id -i root@172.17.254.90                他机ssh信任
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

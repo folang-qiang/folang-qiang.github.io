@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-tomcat简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-scp免密码传输/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -340,7 +340,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-tomcat简介/" itemprop="url">tomcat简介</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-scp免密码传输/" itemprop="url">scp免密码传输</a></h1>
         
 
         <div class="post-meta">
@@ -392,22 +392,18 @@
       
         
           
-            <p>对应系统管理员及Web开发者来说,在学习tomcat之前应该熟悉一些重要内容</p>
-<h2 id="1-术语"><a href="#1-术语" class="headerlink" title="1.术语"></a>1.术语</h2><pre><code>Context, 上下文就是指Web应用程序
+            <p>配置ssh信任访问                        </p>
+<pre><code>主机：    172.17.254.90                
+cd ~/.ssh                    
+ssh-keygen -t rsa                    
+cat id_rsa.pub &gt;&gt;authorized_keys                 本机ssh信任    
+ssh-copy-id -i root@172.17.254.91                他机ssh信任    
 
-Term2 术语2
-
-Term3 术语3
-</code></pre><h2 id="2-目录文件"><a href="#2-目录文件" class="headerlink" title="2.目录文件"></a>2.目录文件</h2><pre><code>$CATALINA_HOME,Tomcat安装的根目录
-
-/bin:    存放用于启动及关闭的文件,以及其他脚本
-
-/conf:    配置文件,最重要的是server.xml,这是容器的主配置文件
-
-/log:    日志文件的默认目录
-
-/webapps    存放web应用的相关文件
-</code></pre><h2 id="3-配置Tomcat"><a href="#3-配置Tomcat" class="headerlink" title="3.配置Tomcat"></a>3.配置Tomcat</h2><pre><code>配置文件中的所有信息在启动时才被读取, 所以改动文件后,必须重启容器才能生效
+备机：    172.17.254.91                
+cd ~/.ssh                    
+ssh-keygen -t rsa                    
+cat id_rsa.pub &gt;&gt;authorized_keys                 本机ssh信任    
+ssh-copy-id -i root@172.17.254.90                他机ssh信任    
 </code></pre>
           
         
@@ -456,7 +452,7 @@ Term3 术语3
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-关闭ipv6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-proxool简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -475,7 +471,7 @@ Term3 术语3
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-关闭ipv6/" itemprop="url">关闭ipv6</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-proxool简介/" itemprop="url">proxool简介</a></h1>
         
 
         <div class="post-meta">
@@ -527,148 +523,31 @@ Term3 术语3
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br><span class="line">	net.ipv6.conf.all.disable_ipv6=1</span><br><span class="line">vi /etc/sysconfig/network</span><br><span class="line">	NETWORKING_IPV6=no</span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ethX</span><br><span class="line">	IPV6INIT=no</span><br><span class="line">service network restart</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
+            <p>Proxool是一种Java数据库连接池技术</p>
+<pre><code>易用，简装的连接池
 
-    
+提供监控功能，便于发现连接泄露
+</code></pre><h2 id="1-proxool-xml文件"><a href="#1-proxool-xml文件" class="headerlink" title="1.proxool.xml文件"></a>1.proxool.xml文件</h2><pre><code>alias：    别名
 
-    
+driver-url：    url连接串
 
-    
+driver-class：    驱动类
 
-    <footer class="post-footer">
-      
+property
 
-      
+    user        用户名
 
-      
+    password    密码
+</code></pre><h2 id="2-最大连接数默认5个，超过这个数，再有请求时，就排在队列中等候，"><a href="#2-最大连接数默认5个，超过这个数，再有请求时，就排在队列中等候，" class="headerlink" title="2.最大连接数默认5个，超过这个数，再有请求时，就排在队列中等候，"></a>2.最大连接数默认5个，超过这个数，再有请求时，就排在队列中等候，</h2><pre><code>maximum-connection-count    最大连接数
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+minimum-connection-count    最小连接数
+</code></pre><h2 id="3-proxool自动侦查各个连接状态的时间间隔，侦查到空闲的连接就马上回收，超时的销毁默认30s"><a href="#3-proxool自动侦查各个连接状态的时间间隔，侦查到空闲的连接就马上回收，超时的销毁默认30s" class="headerlink" title="3.proxool自动侦查各个连接状态的时间间隔，侦查到空闲的连接就马上回收，超时的销毁默认30s"></a>3.proxool自动侦查各个连接状态的时间间隔，侦查到空闲的连接就马上回收，超时的销毁默认30s</h2><pre><code>house-keeping-sleep-time
 
+maximum-new-connections        没有空闲连接可以分配在队列中红等候的最大请求数，超过这个请求数的用户连接不在接受
 
-    
-      
+prototype-count             最少保持的空闲连接数
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-建立外部表/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-建立外部表/" itemprop="url">建立外部表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="建立外部表"><a href="#建立外部表" class="headerlink" title="建立外部表"></a>建立外部表</h2><pre><code>--安装postgres_fdw
-
-CREATE EXTENSION postgres_fdw
-
---新建远程数据库
-
-create server masterdb foreign data wrapper postgres_fdw options (host localhost,dbname MasterDB,port 5432) ;
-
---新建用户
-
-create user mapping FOR postgres server masterdb options (user postgres,password sa) ;
-
---建立外部表
-
-CREATE FOREIGN TABLE branches
-
-   (branchcd integer ,
-
-    branchname character varying(64) ,
-
-    branchtype integer NOT NULL)
-
-   SERVER masterdb;
+house-keeping-test-sql         用于保持连接的测试语句
 </code></pre>
           
         
@@ -717,7 +596,7 @@ CREATE FOREIGN TABLE branches
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-挂载硬盘/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-pgpool命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -736,7 +615,7 @@ CREATE FOREIGN TABLE branches
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-挂载硬盘/" itemprop="url">挂载硬盘</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-pgpool命令/" itemprop="url">pgpool命令</a></h1>
         
 
         <div class="post-meta">
@@ -788,142 +667,108 @@ CREATE FOREIGN TABLE branches
       
         
           
-            <p>mount -t ntfs-3g /dev/sdb1 /mnt/</p>
+            <h2 id="查询锁："><a href="#查询锁：" class="headerlink" title="查询锁："></a>查询锁：</h2><pre><code>SELECT
 
-          
-        
-      
-    </div>
-    
-    
-    
+    locked.pid AS locked_pid,
 
-    
+    locker.pid AS locker_pid,
 
-    
+    locked_act.usename AS locked_user,
 
-    
+    locker_act.usename AS locker_user,
 
-    <footer class="post-footer">
-      
+    locked.virtualtransaction,
 
-      
+    locked.transactionid,
 
-      
+    relname
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+FROM
+
+    pg_locks locked
+
+    LEFT OUTER JOIN pg_class ON (locked.relation = pg_class.oid),
+
+    pg_locks locker,
+
+    pg_stat_activity locked_act,
+
+    pg_stat_activity locker_act
+
+WHERE
+
+    locker.granted=true AND
+
+    locked.granted=false AND
+
+    locked.pid=locked_act.pid AND
+
+    locker.pid=locker_act.pid AND
+
+    locked.relation=locker.relation;
+
+---------------------
+
+select * from pg_stat_activity aa,
+
+(
+
+    select a.locktype,a.database,a.pid,a.mode,a.relation,b.relname from pg_locks a join pg_class b on a.relation=b.oid
+
+ where upper(b.relname)=FX_WDSJ_DSZH
+
+) bb
+
+where aa.pid=bb.pid
+
+ and aa.waiting=t
+</code></pre><h2 id="–查询是否锁表了"><a href="#–查询是否锁表了" class="headerlink" title="–查询是否锁表了"></a>–查询是否锁表了</h2><pre><code>select pid from pg_locks where relation=(select oid from pg_class where relname=表);
+
+ tb_cyplate_localitycheck
+</code></pre><h2 id="查询proc："><a href="#查询proc：" class="headerlink" title="查询proc："></a>查询proc：</h2><pre><code>select proname --, prosrc
+
+from pg_proc where LOWER(prosrc) like %join% and CHAR_LENGTH(prosrc) ##  100;
+</code></pre><h2 id="查询连接："><a href="#查询连接：" class="headerlink" title="查询连接："></a>查询连接：</h2><pre><code>SELECT * FROM pg_stat_activity
+</code></pre><h2 id="查询正在执行的语句："><a href="#查询正在执行的语句：" class="headerlink" title="查询正在执行的语句："></a>查询正在执行的语句：</h2><pre><code>select * from pg_stat_activity where waiting=t;
 
 
-    
-      
 
-  
+kill pid：
 
-  
-  
-  
+select pg_cancel_backend(16023);
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-关闭防火墙/">
+select  pg_terminate_backend(16023);
+</code></pre><h2 id="查询备机延迟："><a href="#查询备机延迟：" class="headerlink" title="查询备机延迟："></a>查询备机延迟：</h2><pre><code>select now()-pg_last_xact_replay_timestamp()
+</code></pre><h2 id="查询备机："><a href="#查询备机：" class="headerlink" title="查询备机："></a>查询备机：</h2><pre><code>select * from pg_stat_replication;
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
+/opt/postgres/9.3/bin/psql -U postgres -p 5432 -c &quot;select * from pg_stat_replication;&quot;
+</code></pre><h2 id="查询语句log："><a href="#查询语句log：" class="headerlink" title="查询语句log："></a>查询语句log：</h2><pre><code>select * from pg_stat_statements
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
+where query like %tttt%;
+</code></pre><h2 id="清除语句log："><a href="#清除语句log：" class="headerlink" title="清除语句log："></a>清除语句log：</h2><pre><code>SELECT pg_stat_statements_reset();
+</code></pre><h2 id="显示同步备机名："><a href="#显示同步备机名：" class="headerlink" title="显示同步备机名："></a>显示同步备机名：</h2><pre><code>show synchronous_standby_names
 
-    
-      <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-关闭防火墙/" itemprop="url">关闭防火墙</a></h1>
-        
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
+pgagent:
 
-            
+/opt/pgagent/bin/pgagent hostaddr=localhost dbname=postgres user=postgres
 
-            
-          </span>
 
-          
 
-          
-            
-          
+pgpool:
 
-          
-          
+/opt/postgres/9.3/bin/psql -U postgres -p 9999 -c &quot;show pool_nodes;&quot;
+</code></pre><h2 id="查看主pgpool"><a href="#查看主pgpool" class="headerlink" title="查看主pgpool"></a>查看主pgpool</h2><pre><code>pcp_watchdog_info 10 10.2.4.90 9898 postgres sa
 
-          
+pcp_watchdog_info 10 10.2.4.90 9898 postgres sa 0
+</code></pre><h2 id="添加pgpool节点"><a href="#添加pgpool节点" class="headerlink" title="添加pgpool节点"></a>添加pgpool节点</h2><pre><code>pcp_attach_node  10  localhost  9898  postgres  sa  0
+</code></pre><h2 id="删除pgpool节点"><a href="#删除pgpool节点" class="headerlink" title="删除pgpool节点"></a>删除pgpool节点</h2><pre><code>pcp_detach_node  10  localhost  9898  postgres  sa  0
+</code></pre><h2 id="停止pgpool"><a href="#停止pgpool" class="headerlink" title="停止pgpool"></a>停止pgpool</h2><pre><code>pcp_stop_pgpool  10  localhost  9898  postgres  sa  s
 
-          
+pcp_stop_pgpool  10  localhost  9898  postgres  sa  f
 
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-重启后生效"><a href="#1-重启后生效" class="headerlink" title="1) 重启后生效"></a>1) 重启后生效</h2><pre><code>开启： chkconfig iptables on
-
-关闭： chkconfig iptables off
-</code></pre><h2 id="2-即时生效，重启后失效"><a href="#2-即时生效，重启后失效" class="headerlink" title="2) 即时生效，重启后失效"></a>2) 即时生效，重启后失效</h2><pre><code>开启： service iptables start
-
-关闭： service iptables stop
-</code></pre><h2 id="centos-7："><a href="#centos-7：" class="headerlink" title="centos 7："></a>centos 7：</h2><pre><code>systemctl stop firewalld.service #停止
-
-systemctl disable firewalld.service #禁用.
-</code></pre><h2 id="3-postgres-5432不能连接"><a href="#3-postgres-5432不能连接" class="headerlink" title="3) postgres 5432不能连接"></a>3) postgres 5432不能连接</h2><pre><code>nc -z 192.168.4.224 5432 fail
-
-iptables属于系统服务，netstat找不到
-
-解决方法：
-
-iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
+pcp_stop_pgpool  10  localhost  9898  postgres  sa  i
 </code></pre>
           
         
@@ -972,7 +817,7 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-查看sqlite数据库/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-eclipse修改workspace/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -991,7 +836,7 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-查看sqlite数据库/" itemprop="url">查看sqlite数据库</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-eclipse修改workspace/" itemprop="url">eclipse修改workspace</a></h1>
         
 
         <div class="post-meta">
@@ -1043,129 +888,7 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">run-as com.tre.android.framework(app的package名）</span><br><span class="line">cd databases</span><br><span class="line">ls</span><br><span class="line">sqlite3 pacerplayer.db</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-环境变量path误删解决办法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-环境变量path误删解决办法/" itemprop="url">环境变量path误删解决办法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-打开注册表"><a href="#1-打开注册表" class="headerlink" title="1.打开注册表"></a>1.打开注册表</h3><p>Win+R 输入regedit打开注册表(开始-运行里输入regedit）</p>
-<p>找到  HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control\Session Manager\Environment下，</p>
-<h3 id="2-新建path"><a href="#2-新建path" class="headerlink" title="2.新建path"></a>2.新建path</h3><p>右边找到path，把数值复制到HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Environment下，</p>
-<p>若没有path可以新建,然后把值对应复制进去.</p>
+            <h2 id="打开preference，输入workspace检索，勾选Prompt-workspace-on-startup"><a href="#打开preference，输入workspace检索，勾选Prompt-workspace-on-startup" class="headerlink" title="打开preference，输入workspace检索，勾选Prompt workspace on startup"></a>打开preference，输入workspace检索，勾选Prompt workspace on startup</h2><p><img src="http://img.blog.csdn.net/20170308113506399?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGVsbG9fenln/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 
           
         
@@ -1214,7 +937,7 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-获取MAC地址/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-pgpool添加用户/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1233,7 +956,7 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-获取MAC地址/" itemprop="url">获取MAC地址</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-pgpool添加用户/" itemprop="url">pgpool添加用户</a></h1>
         
 
         <div class="post-meta">
@@ -1285,186 +1008,28 @@ iptables -A INPUT -p tcp --dport 5432 -j ACCEPT
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;&gt;&lt;/uses-permission&gt;</span><br><span class="line"></span><br><span class="line">WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);</span><br><span class="line">WifiInfo info = wifi.getConnectionInfo();</span><br><span class="line">return info.getMacAddress();</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
+            <h2 id="1-pgpool添加用户"><a href="#1-pgpool添加用户" class="headerlink" title="1.pgpool添加用户"></a>1.pgpool添加用户</h2><pre><code>cd /etc/pgpool-II
 
-    
+vi pool_passwd
+</code></pre><h2 id="2-执行sql语句-获取md5"><a href="#2-执行sql语句-获取md5" class="headerlink" title="2.执行sql语句,获取md5"></a>2.执行sql语句,获取md5</h2><pre><code>select rolname,rolpassword from pg_authid
 
-    
+vi pool_passwd
 
-    
+    appforpacer:md5e72cd3feac7ea1a6b372aa8a5fec0a7f
+</code></pre><h2 id="3-重新启动pgpool"><a href="#3-重新启动pgpool" class="headerlink" title="3.重新启动pgpool"></a>3.重新启动pgpool</h2><pre><code>ps -ef | grep pgpool | grep -v grep  | awk &apos;{system(&quot;kill -9 &quot; $2)}&apos;;
 
-    <footer class="post-footer">
-      
+rm -f /tmp/.s.PGSQL.9999 /tmp/.s.PGSQL.9898
 
-      
+pgpool
 
-      
+1)启动失败,10.100.2.89被占用
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+    ifconfig etho0:0 down
 
+    pgpool
+</code></pre><h2 id="4-重新加载配置文件"><a href="#4-重新加载配置文件" class="headerlink" title="4.重新加载配置文件"></a>4.重新加载配置文件</h2><pre><code>pgpool [-c][-f config_file][-a hba_file][-F pcp_config_file] reload
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-负载平衡/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="李强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="folang">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-负载平衡/" itemprop="url">负载平衡</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
-                2017-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>浏览器    –&gt;     nginx    –&gt;   Tomcat</p>
-<h2 id="1-代理转发"><a href="#1-代理转发" class="headerlink" title="1.代理转发"></a>1.代理转发</h2><pre><code>location / {
-    # root html;
-    index index.html index.htm;
-    proxy-pass http://192.168.1.62:8080; #代理转发
-}
-</code></pre><h2 id="2-nginx策略"><a href="#2-nginx策略" class="headerlink" title="2.nginx策略"></a>2.nginx策略</h2><pre><code>nginx  --&gt;   策略   Tomcat1
-                    Tomcat2
-                    Tomcat3
-</code></pre><p>1）策略</p>
-<pre><code>多个服务器，形成服务器组
-
-指定转给组
-
-策略决定发给谁
-</code></pre><p>2）一组服务器</p>
-<pre><code>upstream tomcats{
-
-    server    192.168.1.62:8080;
-
-    server     192.168.1.63:8080;
-
-}
-</code></pre><p>3）策略</p>
-<pre><code>默认：    轮询，1,2,1,2
-
-backup:    只有非备份机都挂机，才启动
-
-dwon:    当前服务器停止（暂时停机维护）
-
-max-fails:        最大失败次数
-
-fail-timeout:    挂机多长时间再尝试
-
-
-
-1.weight 权重
-
-    server 192.168.1.64:8080 weight=5; #指定权重
-
-2.ip_hash
-
-    客户端ip_hash运算，用户锁定在服务器
-
-    权重失效
-
-3.fail
-
-    根据服务器当前性能，动态分配
-
-4.url_hash
-
-    请求url，hash运算，相同url访问同一服务器
-
-    做缓存服务器，每个商品都是独一的
-
-    每个服务器缓存不同商品
-
-
-
-        加快访问速度
+pgpool -F pool_passwd reload
 </code></pre>
           
         
@@ -1513,7 +1078,7 @@ fail-timeout:    挂机多长时间再尝试
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-高可用性方案/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-md5 authentication failed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李强">
@@ -1532,7 +1097,7 @@ fail-timeout:    挂机多长时间再尝试
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/25/2017-12-25-高可用性方案/" itemprop="url">高可用性方案</a></h1>
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-md5 authentication failed/" itemprop="url">md5 authentication failed</a></h1>
         
 
         <div class="post-meta">
@@ -1584,42 +1149,565 @@ fail-timeout:    挂机多长时间再尝试
       
         
           
-            <h2 id="高可用框架基础"><a href="#高可用框架基础" class="headerlink" title="高可用框架基础"></a>高可用框架基础</h2><pre><code>多个数据库协同工作，一台失效，另一台顶替
+            <p>Unable to connect to server:</p>
+<p>ERROR: md5 authentication failed</p>
+<p>DETAIL: password does not match</p>
+<h2 id="1-执行sql语句-获取用户md5"><a href="#1-执行sql语句-获取用户md5" class="headerlink" title="1.执行sql语句,获取用户md5"></a>1.执行sql语句,获取用户md5</h2><pre><code>select rolname,rolpassword from pg_authid
+</code></pre><h2 id="2-pgpool添加用户"><a href="#2-pgpool添加用户" class="headerlink" title="2.pgpool添加用户"></a>2.pgpool添加用户</h2><pre><code>cd /etc/pgpool-II
 
-几台数据库同时提供服务，用户可用访问任意一台数据库
+vi pool_passwd
 
-数据同步是高可用方案的基础
-</code></pre><h2 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h2><pre><code>共享磁盘
-
-    SAN存储，一台机器失效，把SAN挂到另一台机器
-
-WAN日志同步，流复制
-
-    postgres自身提供，搭建主从服务器
-
-触发器
-
-    使用触发器几率数据变化，同步到另一台数据库
-
-可复制中间件
-
-    用户不连数据库，连中间件，中间件把语句发给多台数据库
-
-改造postgres源码
-
-    修改postgres源码来截取数据库变更，同步到另一台数据库
-</code></pre><h2 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h2><pre><code>主备方式
-
-    数据同步：故障切换中，数据完全不丢失
-
-    数据异步：性能高，网络中断（主机挂起）
-
-    保证服务中断的时间尽量少，灵敏故障检测，防误触发
-
-数据
-
-    硬件故障、软件bug、人为失误
+    postgres:md52a8e01d8bbbc4bfff072e0eb3e47e35f
+</code></pre><h2 id="3-重新加载配置文件"><a href="#3-重新加载配置文件" class="headerlink" title="3.重新加载配置文件"></a>3.重新加载配置文件</h2><pre><code>pgpool -F pool_passwd reload
 </code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-ftp上传/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-ftp上传/" itemprop="url">ftp上传</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ftp上传文件"><a href="#ftp上传文件" class="headerlink" title="ftp上传文件"></a>ftp上传文件</h3><p>   ftp -s:ftp1.bat</p>
+<pre><code>open 192.168.4.104
+anonymous
+anonymous
+lcd AppData\Roaming\MicroSIP
+cd SIP
+binary
+get Contacts.xml
+get MicroSIP.ini
+Close
+quit
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-eclipse常用快捷键/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-eclipse常用快捷键/" itemprop="url">eclipse常用快捷键</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Eclipse-快捷键"><a href="#Eclipse-快捷键" class="headerlink" title="Eclipse 快捷键"></a>Eclipse 快捷键</h2><pre><code>编辑
+
+Ctrl+1 快速修复（比如import类、try catch等）
+
+Ctrl+Shift+F 格式化当前代码
+
+Ctrl+Shift+M 导入import
+
+Ctrl+Shift+O 去除多余import
+
+Alt+/         内容辅助
+
+Ctrl+Alt+↓     复制当前行到下一行（复制增加）
+
+Ctrl+Alt+↑     复制当前行到上一行（复制增加）
+
+选择
+
+Alt+Shift+↑    选择封装元素
+
+Alt+Shift+←    选择上一个元素
+
+Alt+Shift+→    选择下一个元素
+
+搜索
+
+Ctrl+J    查找
+
+Ctrl+Shift+U    列出所有包含字符串的行
+
+Ctrl+G            工作区声明
+
+Ctrl+Shift+G     工作区引用
+
+Ctrl+Shift+T     搜索类
+
+Ctrl+Shift+R    搜索文件
+
+Ctrl+E          打开当前文件列表
+
+Ctrl+PageUp/PageDown    切换已经打开的文件
+
+调试
+
+Ctrl+Shift+D     显示变量值
+
+Ctrl+Shift+B    设断点
+
+Ctrl+R            运行至(节省很多断点)
+
+重构
+
+Alt+Shift+R        重命名
+
+Alt+Shift+M        抽取方法
+
+其他
+
+Ctrl+M            最大化当前View
+
+Ctrl+W            关闭当前View
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-batch_判断手机adb连接/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-batch_判断手机adb连接/" itemprop="url">batch_判断手机adb连接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># 判断pacer是不是开机</span><br><span class="line"></span><br><span class="line">for i in `seq 254`</span><br><span class="line">do</span><br><span class="line">    ip=192.168.126.$i</span><br><span class="line">    nc -z $ip 5555 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">    [ $? -eq 0 ] &amp;&amp; echo &quot;$ip is alive&quot;  || echo &quot;&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/2017-12-25-batch_SQL Server 同期数据到Postgres/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/2017-12-25-batch_SQL Server 同期数据到Postgres/" itemprop="url">batch_SQL Server 同期数据到Postgres</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T00:00:00+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	#!/bin/bash -xv</span><br><span class="line">	# 从SQL Server 同期数据到Postgres</span><br><span class="line">	export PATH=/home/SMART_TRIAL:/home/SMART:/usr/local/bin:/$&#123;PATH&#125;</span><br><span class="line">	export LANG=ja_JP.UTF-8</span><br><span class="line"></span><br><span class="line">&gt;マスタファイル開く</span><br><span class="line"></span><br><span class="line">	#1.SQLIP</span><br><span class="line">	#2.SQLDB名</span><br><span class="line">	#3.SQLUserGroup(dbo)</span><br><span class="line">	#4.SQLテーブル名</span><br><span class="line">	#5.SQL接続ユーザー名</span><br><span class="line">	#6.SQL接続パスワード</span><br><span class="line">	#7.日付列</span><br><span class="line">	cat /tmp/baihen/tablelist_kanzen | head -n 2 |</span><br><span class="line">		while read svip dbname ugp tname user pwd cols;</span><br><span class="line">	do</span><br><span class="line"></span><br><span class="line">&gt;Step1.SQLからデータ抽出</span><br><span class="line"></span><br><span class="line">	#	echo &quot;select * from &quot;$&#123;tname&#125;&quot; with (nolock)&quot; 	|</span><br><span class="line">	#	java -jar /home/SMART_TRIAL/jd2s.jar -s$&#123;svip&#125;:$&#123;dbname&#125;:$&#123;user&#125;:$&#123;pwd&#125; -q-	 &gt;/tmp/baihen/table_$&#123;tname&#125;</span><br><span class="line">	#	deom: echo &quot;select top 10 * from M_DATE &quot; | java -jar /home/SMART_TRIAL/jd2s.jar -s172.17.254.213:dbcyber:sa:1234 -q- &gt;/tmp/M_DATE</span><br><span class="line">	echo &quot;select * from dbcyber.dbo.NaFuDaPrintHistory where CONVERT(CHAR(8), registered, 112) = 20170208&quot; | java -jar /home/SMART_TRIAL/jd2s.jar -s10.100.2.118:dbcyber:sa:dbadmin -q- &gt;/tmp/10.100.2.118</span><br><span class="line">&gt;Step2.日付列の特殊処理</span><br><span class="line"></span><br><span class="line">	cp /tmp/baihen/table_$&#123;tname&#125; /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line"></span><br><span class="line">	if [ $cols != &quot;0&quot; ] ; then</span><br><span class="line">		echo $&#123;cols&#125; | sed s/_/ /g | tov |</span><br><span class="line">		while read num ; do</span><br><span class="line">		echo $&#123;num&#125;</span><br><span class="line"></span><br><span class="line">		#cat /tmp/baihen/table_$&#123;tname&#125;_tmp | awk $&quot;$&#123;num&#125;&quot;=($&quot;$&#123;num&#125;&quot;==&quot;19000101000000&quot;?&quot;_&quot;:substr($&quot;$&#123;num&#125;&quot;,1,4)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,5,2)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,7,2)&quot;_&quot;substr($&quot;$&#123;num&#125;&quot;,9,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,11,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,13,2)) &gt;/tmp/baihen/tmp</span><br><span class="line"></span><br><span class="line">		cat /tmp/baihen/table_$&#123;tname&#125;_tmp | awk $&quot;$&#123;num&#125;&quot;=substr($&quot;$&#123;num&#125;&quot;,1,4)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,5,2)&quot;/&quot;substr($&quot;$&#123;num&#125;&quot;,7,2)&quot;_&quot;substr($&quot;$&#123;num&#125;&quot;,9,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,11,2)&quot;:&quot;substr($&quot;$&#123;num&#125;&quot;,13,2) &gt;/tmp/baihen/tmp</span><br><span class="line">		mv /tmp/baihen/tmp /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line">		done</span><br><span class="line"></span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">&gt;Step3.そのた処理</span><br><span class="line"></span><br><span class="line">	cat /tmp/baihen/table_$&#123;tname&#125;_tmp | sed s/ /,/g;s/_/ /g;s/, ,/,\\N,/g;s/, ,/,\\N,/g;s/, /,\\N/g | gzip -cf &gt;table_$&#123;tname&#125;.gz</span><br><span class="line"></span><br><span class="line">	rm /tmp/baihen/table_$&#123;tname&#125;_tmp</span><br><span class="line"></span><br><span class="line">&gt;Step4.処理後のPostgreへINPUTのファイルをPostgreサーバーへ送付(圧縮ファイルで送付してから解凍)</span><br><span class="line"></span><br><span class="line">	scp table_$&#123;tname&#125;.gz root@10.100.2.90:/tmp/data</span><br><span class="line">	ssh -n root@10.100.2.90 &quot;gunzip /tmp/data/table_$&#123;tname&#125;.gz&quot;</span><br><span class="line"></span><br><span class="line">&gt;Step5.Postgreへ投入対象テーブルクリアして、データ投入</span><br><span class="line"></span><br><span class="line">	ssh -n root@10.100.2.90 &quot; /opt/postgres/9.3/bin/psql -U postgres -d $&#123;dbname&#125;  -t -p 5432 -c \&quot;truncate table $&#123;tname&#125; ; copy $&#123;tname&#125; from /tmp/data/table_$&#123;tname&#125; DELIMITER ,;\&quot;&quot;</span><br><span class="line"></span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	exit 0</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1708,7 +1796,7 @@ WAN日志同步，流复制
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1730,7 +1818,7 @@ WAN日志同步，流复制
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

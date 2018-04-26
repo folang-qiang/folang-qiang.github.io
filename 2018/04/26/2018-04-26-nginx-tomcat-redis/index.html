@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、系统负载均衡高可用1.系统架构图 redis原理         集群中至少应该有奇数个节点，所以至少有三个节点，每个节点至少有一个备份节点，         所以下面使用6节点（主节点、备份节点由redis-cluster集群确定）         Redis集群是redis提供分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。 节点一个redis 集群通常有多个节点（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx+tomcat+redis">
+<meta property="og:url" content="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/index.html">
+<meta property="og:site_name" content="folang">
+<meta property="og:description" content="一、系统负载均衡高可用1.系统架构图 redis原理         集群中至少应该有奇数个节点，所以至少有三个节点，每个节点至少有一个备份节点，         所以下面使用6节点（主节点、备份节点由redis-cluster集群确定）         Redis集群是redis提供分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。 节点一个redis 集群通常有多个节点（">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/redis.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/yuanlitu.png">
+<meta property="og:updated_time" content="2018-04-26T07:16:10.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx+tomcat+redis">
+<meta name="twitter:description" content="一、系统负载均衡高可用1.系统架构图 redis原理         集群中至少应该有奇数个节点，所以至少有三个节点，每个节点至少有一个备份节点，         所以下面使用6节点（主节点、备份节点由redis-cluster集群确定）         Redis集群是redis提供分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。 节点一个redis 集群通常有多个节点（">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/redis.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/"/>
+
+
+
+
+
+  <title>nginx+tomcat+redis | folang</title>
+  
+
+
+
+
+
+
+
+
+</head>
+ 
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> 
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">folang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/2018-04-26-nginx-tomcat-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李强">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="folang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx+tomcat+redis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T10:00:06+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、系统负载均衡高可用"><a href="#一、系统负载均衡高可用" class="headerlink" title="一、系统负载均衡高可用"></a>一、系统负载均衡高可用</h2><h3 id="1-系统架构图"><a href="#1-系统架构图" class="headerlink" title="1.系统架构图"></a>1.系统架构图</h3><p><img src="/2018/04/26/2018-04-26-nginx-tomcat-redis/redis.png" alt="xitong"></p>
+<h3 id="redis原理"><a href="#redis原理" class="headerlink" title="redis原理"></a>redis原理</h3><p><img src="/2018/04/26/2018-04-26-nginx-tomcat-redis/yuanlitu.png" alt="redis原理图"><br>         集群中至少应该有奇数个节点，所以至少有三个节点，每个节点至少有一个备份节点，<br>         所以下面使用6节点（主节点、备份节点由redis-cluster集群确定）<br>         Redis集群是redis提供分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。</p>
+<h4 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h4><pre><code>一个redis 集群通常有多个节点（node）组成，开始时每个节点相互独立，
+都处于找一个包含自己的集群中，要组建一个真正工作的集群，需要将各个
+独立的节点连接起来，构成一个多节点的集群。
+redis启动时会根据cluster-enabled配置选项是否yes来决定是否开启服务器集群模式。
+集群数据结构：clusterNode结构保存了一个节点当前状态，比如节点的创建时间、节点的名称、
+节点当前的配置纪元、节点的IP地址和端口号
+</code></pre><h4 id="槽指派"><a href="#槽指派" class="headerlink" title="槽指派"></a>槽指派</h4><pre><code>redis集群通过分片来保存数据库的键值对，集群的整个数据库被分成16384个槽（slot），
+数据库中的每个键都属于这16384个槽的其中一个，每个节点都可以处理0个或者最多16384个槽。 
+当数据库中的16384个槽都有节点在处理时，集群处于上线状态，如果任何一个槽没有得到处理，则集群处于下线状态
+</code></pre><h4 id="重新分片"><a href="#重新分片" class="headerlink" title="重新分片"></a>重新分片</h4><pre><code>Redis集群的重新分片操作可以将任意数量已经指派给某个节点的槽改为指派给另外一个节点，
+并且相关槽所属的键值对也会从源节点移动到目标节点。
+重新分片原理：分片操作由redis集群管理软件redis-triib负责执行的
+</code></pre><h4 id="ASK错误"><a href="#ASK错误" class="headerlink" title="ASK错误"></a>ASK错误</h4><pre><code>属于被迁移槽的一部分键对保存在源节点里面，而另一部分键值对则保存在目标节点里面
+</code></pre><h4 id="复制转移"><a href="#复制转移" class="headerlink" title="复制转移"></a>复制转移</h4><pre><code>Redis集群的节点分为主节点和从节点，主节点主要用于处理槽，从节点主要用于复制某个主节点，
+并在被复制的主节点下线时，代替下线的主节点继续处理命令请求。
+设置从节点：
+cluster replicate&lt;node_id&gt;
+可以让接受命令的节点称为node_id所指定的从节点，并开始对主节点进行复制。
+</code></pre><h4 id="故障检测"><a href="#故障检测" class="headerlink" title="故障检测"></a>故障检测</h4><pre><code>集群中的每个节点都会定期地向集群中的其他节点发送PING命令，以此来检查对方是否在线，
+如果接收ping消息的节点没有在规定的时间内，向发送ping消息的节点返回pong消息，那么
+将认为没有返回消息的节点标记为疑似下线。 如果半数以上处理槽的节点都将某节点x报告为疑似下线，
+那么这个主节点x将被标记为已下线。
+</code></pre><h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><pre><code>当一个节点发现自己真在复制的主节点进入已下线状态时，从节点将开始对下线主节点进行故障转移，一下是故障转移的执行步骤。 
+1.复制下线主节点的所有从节点将会有一个从节点被选中。 
+2.被选中的从节点会执行slaveof on one，成为新的主节点。 
+3.新的主节点会撤销所有对已下线主节点的槽指派，并将这些槽指派给自己。 
+4.新的主节点向集群广播一条pong消息，这条pong消息可以让集群中的其他节点立即致电这个节点已经由从节点变为主节点了。 
+5.新的主节点开始接收和自己负责处理的槽有关的命令请求，故障转移完成。 
+集群中的节点通过发送和接受消息进行通信，节点的消息包括meet,ping,pong,publish,fail五种
+</code></pre><h2 id="2-节点间的内部通信机制"><a href="#2-节点间的内部通信机制" class="headerlink" title="2.节点间的内部通信机制"></a>2.节点间的内部通信机制</h2><h3 id="2-1基础通信原理"><a href="#2-1基础通信原理" class="headerlink" title="2.1基础通信原理"></a>2.1基础通信原理</h3><pre><code>redis cluster节点间采取gossip协议进行通信 
+维护集群的元数据有两种方式：集中式和gossip 
+</code></pre><h4 id="集中式："><a href="#集中式：" class="headerlink" title="集中式："></a>集中式：</h4><pre><code>优点在于元数据的更新和读取，时效性非常好，一旦元数据出现变更立即就会更新到集中式的存储中，
+其他节点读取的时候立即就可以立即感知到； 
+不足在于所有的元数据的更新压力全部集中在一个地方，可能导致元数据的存储压力。
+</code></pre><h4 id="gossip："><a href="#gossip：" class="headerlink" title="gossip："></a>gossip：</h4><pre><code>优点在于元数据的更新比较分散，不是集中在一个地方，更新请求会陆陆续续，打到所有节点上去更新，有一定的延时，降低了压力； 
+缺点在于元数据更新有延时可能导致集群的一些操作会有一些滞后。
+10000端口 
+每个节点都有一个专门用于节点间通信的端口，就是自己提供服务的端口号+10000，比如7001，那么用于节点间通信的就是17001端口。 
+每个节点每隔一段时间都会往另外几个节点发送ping消息，同时其他几点接收到ping之后返回pong
+</code></pre><h3 id="2-2gossip协议"><a href="#2-2gossip协议" class="headerlink" title="2.2gossip协议"></a>2.2gossip协议</h3><pre><code>gossip协议包含多种消息，包括ping，pong，meet，fail等等。 
+meet：某个节点发送meet给新加入的节点，让新节点加入集群中，然后新节点就会开始与其他节点进行通信； 
+ping：每个节点都会频繁给其他节点发送ping，其中包含自己的状态还有自己维护的集群元数据，互相通过ping交换元数据； 
+pong: 返回ping和meet，包含自己的状态和其他信息，也可以用于信息广播和更新； 
+fail: 某个节点判断另一个节点fail之后，就发送fail给其他节点，通知其他节点，指定的节点宕机了
+</code></pre><h2 id="3-面向集群的jedis内部实现原理"><a href="#3-面向集群的jedis内部实现原理" class="headerlink" title="3.面向集群的jedis内部实现原理"></a>3.面向集群的jedis内部实现原理</h2><h3 id="3-1-基于重定向的客户端"><a href="#3-1-基于重定向的客户端" class="headerlink" title="3.1 基于重定向的客户端"></a>3.1 基于重定向的客户端</h3><pre><code>请求重定向 
+客户端会挑选任意一个redis实例去发送命令，每个redis实例接收到命令，都会计算key对应的hash slot；
+查看key对应的hash slot
+cluster keyslot key
+
+连接客户端时加-c参数可以自动重定向
+redis-cli -c
+计算hash slot 
+计算hash slot的算法，就是根据key计算CRC16值，然后对16384取模，拿到对应的hash slot； 
+用hash tag可以手动指定key对应的slot，同一个hash tag下的key，都会在一个hash slot中，比如set mykey1:{100}和set mykey2:{100}；
+hash slot查找 
+节点间通过gossip协议进行数据交换，就知道每个hash slot在哪个节点上；
+</code></pre><h3 id="3-2-smart-jedis"><a href="#3-2-smart-jedis" class="headerlink" title="3.2 smart jedis"></a>3.2 smart jedis</h3><pre><code>(1) 什么是smart jedis？ 
+基于重定向的客户端，很消耗网络io，因为大部分情况下，可能都会出现一次请求重定向，才能找到正确的节点； 
+所以大部分的客户端比如java redis客户端，都是jedis，都是smart的， 
+本地维护一份hashslot -&gt; node的映射表在缓存里，大部分情况下直接走本地缓存就可以找到hashslot -&gt; node，不需要通过节点进行moved重定向；
+</code></pre><h2 id="4-高可用性与主备切换原理"><a href="#4-高可用性与主备切换原理" class="headerlink" title="4.高可用性与主备切换原理"></a>4.高可用性与主备切换原理</h2><h3 id="4-1判断节点宕机"><a href="#4-1判断节点宕机" class="headerlink" title="4.1判断节点宕机"></a>4.1判断节点宕机</h3><pre><code>如果一个节点认为另外一个节点宕机，name就是pfail，主观宕机； 
+如果多个节点都认为另外一个节点宕机了，那么就是fail，客观宕机，跟哨兵的原理几乎一样，sdown，odown； 
+在cluster-node-timeout内，某个节点一直没有返回pong，那么就被认为pfail； 
+如果一个节点认为某个节点pfail了，那么会在gossip ping消息中，ping给其他节点，如果超过半数的节点都认为pfail了，那么就会变成fail；
+</code></pre><h3 id="4-2从节点过滤"><a href="#4-2从节点过滤" class="headerlink" title="4.2从节点过滤"></a>4.2从节点过滤</h3><pre><code>对宕机的master node，从其所有的slave node中，选择一个切换成master node； 
+检查每个slave node与master node断开连接的时间，如果超过了cluster-node-timeout * cluster-slave-validity-factor，那么就没有资格切换成master
+</code></pre><h3 id="4-2-从节点选举"><a href="#4-2-从节点选举" class="headerlink" title="4.2 从节点选举"></a>4.2 从节点选举</h3><pre><code> 哨兵：对所有从节点进行排序，slave priority，offset，run id； 
+ 每个从节点，都根据自己对master复制数据的offset，来设置一个选举时间，offset越大（复制数据越多）的从节点，选举时间越靠前，优先进行选举； 
+ 所有的master node开始slave选举投票，给要进行选举的slave进行投票，如果大部分master node（N/2 + 1）都投票给了某个从节点，那么选举通过，那个从节点可以切换成master； 
+从节点执行主备切换，从节点切换为主节点；
+</code></pre><h3 id="4-4与哨兵比较"><a href="#4-4与哨兵比较" class="headerlink" title="4.4与哨兵比较"></a>4.4与哨兵比较</h3><pre><code>整个流程跟哨兵相比，非常类似，所以说，redis cluster功能强大，直接集成了replication和sentinal的功能；
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/2018-04-25-redis集群安装与配置/" rel="next" title="redis集群安装与配置">
+                <i class="fa fa-chevron-left"></i> redis集群安装与配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="李强" />
+            
+              <p class="site-author-name" itemprop="name">李强</p>
+              <p class="site-description motion-element" itemprop="description">懒货一个，吃货一枚</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、系统负载均衡高可用"><span class="nav-number">1.</span> <span class="nav-text">一、系统负载均衡高可用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-系统架构图"><span class="nav-number">1.1.</span> <span class="nav-text">1.系统架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis原理"><span class="nav-number">1.2.</span> <span class="nav-text">redis原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点"><span class="nav-number">1.2.1.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#槽指派"><span class="nav-number">1.2.2.</span> <span class="nav-text">槽指派</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新分片"><span class="nav-number">1.2.3.</span> <span class="nav-text">重新分片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ASK错误"><span class="nav-number">1.2.4.</span> <span class="nav-text">ASK错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制转移"><span class="nav-number">1.2.5.</span> <span class="nav-text">复制转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#故障检测"><span class="nav-number">1.2.6.</span> <span class="nav-text">故障检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#故障转移"><span class="nav-number">1.2.7.</span> <span class="nav-text">故障转移</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-节点间的内部通信机制"><span class="nav-number">2.</span> <span class="nav-text">2.节点间的内部通信机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1基础通信原理"><span class="nav-number">2.1.</span> <span class="nav-text">2.1基础通信原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#集中式："><span class="nav-number">2.1.1.</span> <span class="nav-text">集中式：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gossip："><span class="nav-number">2.1.2.</span> <span class="nav-text">gossip：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2gossip协议"><span class="nav-number">2.2.</span> <span class="nav-text">2.2gossip协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-面向集群的jedis内部实现原理"><span class="nav-number">3.</span> <span class="nav-text">3.面向集群的jedis内部实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基于重定向的客户端"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 基于重定向的客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-smart-jedis"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 smart jedis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-高可用性与主备切换原理"><span class="nav-number">4.</span> <span class="nav-text">4.高可用性与主备切换原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1判断节点宕机"><span class="nav-number">4.1.</span> <span class="nav-text">4.1判断节点宕机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2从节点过滤"><span class="nav-number">4.2.</span> <span class="nav-text">4.2从节点过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-从节点选举"><span class="nav-number">4.3.</span> <span class="nav-text">4.2 从节点选举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4与哨兵比较"><span class="nav-number">4.4.</span> <span class="nav-text">4.4与哨兵比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李强</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'manual') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"display":{"position":"left"},"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
